@@ -1,24 +1,85 @@
 minetest.register_craftitem("canons:gunpowder", {
 	groups = {gunpowder=1},
-	Description = "Gunpowder",
+	description = "Gunpowder",
 	inventory_image = "canons_gunpowder.png"
 })
-minetest.register_craftitem("canons:sulfur", {
-	Description = "Sulfur",
-	inventory_image = "canons_sulfur.png"
-})
+
 minetest.register_craftitem("canons:salt", {
-	Description = "Salt",
+	description = "Salt",
 	inventory_image = "canons_salt.png"
 })
-minetest.register_craft({
-	type = "cooking",
-	output = 'canons:salt',
-	recipe = 'bucket:bucket_water',
+
+minetest.register_craftitem("canons:bucket_salt", {
+	description = "Bucket with salt",
+	inventory_image = "canons_bucket_salt.png",
+	stack_max = 300
 })
 
+minetest.register_craft({
+    type = "shapeless",
+	output = 'canons:salt 12',
+	recipe = {
+		"canons:bucket_salt"
+	},
+	replacements = {
+		{"canons:bucket_salt", "bucket:bucket_empty"}
+	}
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = 'canons:bucket_salt',
+	recipe = 'bucket:bucket_water',
+	cooktime = 15
+})
+
+minetest.register_craftitem("canons:iron_barrel", {
+	groups = {canonbarrel=1},
+	description = "Iron Cannonbarrel",
+	inventory_image = "canons_barrel_iron.png",
+	stack_max = 10
+})
+minetest.register_craftitem("canons:copper_barrel", {
+	groups = {canonbarrel=1},
+	description = "copper Cannonbarrel",
+	inventory_image = "canons_barrel_copper.png",
+	stack_max = 10
+})
+minetest.register_craftitem("canons:mithrill_barrel", {
+	groups = {canonbarrel=1},
+	description = "mithrill Cannonbarrel",
+	inventory_image = "canons_barrel_mithrill.png",
+	stack_max = 10
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = 'canons:gunpowder',
+	recipe = {
+		"default:coal_lump", "default:mese_crystal", "canons:salt"
+	},
+})
+
+minetest.register_craft({
+	output = 'canons:iron_barrel',
+	recipe = {
+		{"default:steelblock", "default:steelblock", "default:steelblock"},
+		{"", "default:mese_block", ""},
+		{"default:steelblock", "default:steelblock", "default:steelblock"}
+	},
+})
+minetest.register_craft({
+	output = 'canons:canon',
+	recipe = {
+		{"default:cobble", "default:cobble", "default:cobble"},
+		{"", "group:canonbarrel", ""},
+		{"default:cobble", "default:cobble", "default:cobble"}
+	},
+})
+
+
 minetest.register_craftitem("canons:stone_bullet", {
-	Description = "Gunpowder",
+	Description = "Stone Bullet",
 	inventory_image = "canons_bullet.png"
 })
 
@@ -91,3 +152,5 @@ minetest.register_node("canons:canon", {
 	on_metadata_inventory_move = canons.inventory_modified,
 	
 })
+
+
