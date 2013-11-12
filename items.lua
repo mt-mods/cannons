@@ -19,24 +19,6 @@ minetest.register_craftitem("canons:bucket_salt", {
 	stack_max = 300
 })
 
-minetest.register_craftitem("canons:iron_barrel", {
-	groups = {canonbarrel=1},
-	description = "Iron Cannonbarrel",
-	inventory_image = "canons_barrel_iron.png",
-	stack_max = 10
-})
-minetest.register_craftitem("canons:copper_barrel", {
-	groups = {canonbarrel=1},
-	description = "copper Cannonbarrel",
-	inventory_image = "canons_barrel_copper.png",
-	stack_max = 10
-})
-minetest.register_craftitem("canons:mithrill_barrel", {
-	groups = {canonbarrel=1},
-	description = "mithrill Cannonbarrel",
-	inventory_image = "canons_barrel_mithrill.png",
-	stack_max = 10
-})
 
 minetest.register_craftitem("canons:stone_bullet", {
 	Description = "Stone Bullet",
@@ -74,23 +56,7 @@ minetest.register_craft({
 	},
 })
 
--- not needed --
-minetest.register_craft({
-	output = 'canons:iron_barrel',
-	recipe = {
-		{"default:steelblock", "default:steelblock", "default:steelblock"},
-		{"", "default:mese_block", ""},
-		{"default:steelblock", "default:steelblock", "default:steelblock"}
-	},
-})
-minetest.register_craft({
-	output = 'canons:canon',
-	recipe = {
-		{"default:cobble", "default:cobble", "default:cobble"},
-		{"", "group:canonbarrel", ""},
-		{"default:cobble", "default:cobble", "default:cobble"}
-	},
-})
+
 -- new crafts --
 
 minetest.register_craft({
@@ -226,7 +192,9 @@ minetest.register_node("canons:canon", {
 		end
 	end,
 	allow_metadata_inventory_put = canons.allow_metadata_inventory_put,
+	
 	allow_metadata_inventory_move = canons.allow_metadata_inventory_move,
+	
 	on_metadata_inventory_put = canons.inventory_modified,
 	
 	on_metadata_inventory_take = canons.inventory_modified,
