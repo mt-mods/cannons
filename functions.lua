@@ -40,7 +40,32 @@ function canons.inventory_modified(pos)
 		meta:set_string("infotext","Canon is ready")
 	end		
 end
+canons.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		stack = stack:to_table()
+		if listname == "gunpowder" and stack.name == "canons:gunpowder" then	
+			return stack.count
+		elseif listname == "muni" and canons.is_muni(stack.name) then	
+			return stack.count
+		else return 0
+		end
 
+	end
+canons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		local stack = inv:get_stack(from_list, from_index)
+		stack = stack:to_table()
+		if to_list == "gunpowder" and stack.name == "canons:gunpowder" then
+			return count
+		
+		elseif to_list == "muni" and  canons.is_muni(stack.name) then
+			return count
+		else
+			return 0
+		end
+	end
 function canons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()

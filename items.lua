@@ -225,33 +225,8 @@ minetest.register_node("canons:canon", {
 			return true
 		end
 	end,
-	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-		local meta = minetest.get_meta(pos)
-		local inv = meta:get_inventory()
-		stack = stack:to_table()
-		if listname == "gunpowder" and stack.name == "canons:gunpowder" then	
-			return stack.count
-		elseif listname == "muni" and canons.is_muni(stack.name) then	
-			return stack.count
-		else return 0
-		end
-
-	end,
-	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		local meta = minetest.get_meta(pos)
-		local inv = meta:get_inventory()
-		local stack = inv:get_stack(from_list, from_index)
-		stack = stack:to_table()
-		if to_list == "gunpowder" and stack.name == "canons:gunpowder" then
-			return count
-		
-		elseif to_list == "muni" and  canons.is_muni(stack.name) then
-			return count
-		else
-			return 0
-		end
-		
-	end,
+	allow_metadata_inventory_put = canons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = canons.allow_metadata_inventory_move,
 	on_metadata_inventory_put = canons.inventory_modified,
 	
 	on_metadata_inventory_take = canons.inventory_modified,
@@ -262,7 +237,7 @@ minetest.register_node("canons:canon", {
 
 -- bronze cannon --
 minetest.register_node("canons:bronze_canon", {
-		description = "Cannon",
+		description = "Cannon (bronze)",
 	stack_max = 1,
 	tiles = {"cannon_bronze_cannon_top.png","cannon_bronze_cannon_top.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_top.png^canons_canons_rim.png","cannon_bronze_cannon_side.png"},
 	drawtype = "nodebox",
@@ -309,33 +284,10 @@ minetest.register_node("canons:bronze_canon", {
 			return true
 		end
 	end,
-	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
-		local meta = minetest.get_meta(pos)
-		local inv = meta:get_inventory()
-		stack = stack:to_table()
-		if listname == "gunpowder" and stack.name == "canons:gunpowder" then	
-			return stack.count
-		elseif listname == "muni" and canons.is_muni(stack.name) then	
-			return stack.count
-		else return 0
-		end
+	allow_metadata_inventory_put = canons.allow_metadata_inventory_put,
 
-	end,
-	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
-		local meta = minetest.get_meta(pos)
-		local inv = meta:get_inventory()
-		local stack = inv:get_stack(from_list, from_index)
-		stack = stack:to_table()
-		if to_list == "gunpowder" and stack.name == "canons:gunpowder" then
-			return count
-		
-		elseif to_list == "muni" and  canons.is_muni(stack.name) then
-			return count
-		else
-			return 0
-		end
-		
-	end,
+	allow_metadata_inventory_move = canons.allow_metadata_inventory_move,
+	
 	on_metadata_inventory_put = canons.inventory_modified,
 	
 	on_metadata_inventory_take = canons.inventory_modified,
@@ -375,7 +327,7 @@ minetest.register_node("canons:canon_stand", {
 	},
 })	
 minetest.register_node("canons:canon_ball_wood", {
-	description = "Cannon Ball Stone",
+	description = "Cannon Ball Wood",
 	stack_max = 99,
 	tiles = {"default_wood.png"},
 	drawtype = "nodebox",
@@ -429,7 +381,7 @@ minetest.register_node("canons:canon_ball_stone", {
 })
 
 minetest.register_node("canons:canon_ball_steel", {
-	description = "Cannon Ball Wood",
+	description = "Cannon Ball Steel",
 	stack_max = 99,
 	tiles = {"cannon_cannon_top.png"},
 	drawtype = "nodebox",
