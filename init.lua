@@ -15,3 +15,4 @@ dofile(MODPATH .."/canonballs.lua")
 
 
 minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- loaded from "..minetest.get_modpath(minetest.get_current_modname()))
+
