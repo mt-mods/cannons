@@ -75,6 +75,15 @@ minetest.register_craft({
 	output = 'cannons:stand',
 	recipe = {
 		{"default:wood", "", "default:wood"},
+		{"default:wood", "default:steelblock", "default:cobble"},
+		{"default:wood", "default:wood", "default:cobble"}
+	},
+})
+
+minetest.register_craft({
+	output = 'cannons:stand_wood',
+	recipe = {
+		{"default:wood", "", "default:wood"},
 		{"default:wood", "default:steelblock", "default:wood"},
 		{"default:wood", "default:wood", "default:wood"}
 	},
@@ -222,6 +231,25 @@ minetest.register_node("cannons:stand", {
 		},
 	}
 })	
+
+minetest.register_node("cannons:stand_wood", {
+	description = "Cannon Stand",
+	stack_max = 99,
+	tiles = {"default_junglewood.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_wood.png","default_junglewood.png^cannons_rim.png"},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=2},
+	sounds = default.node_sound_wood_defaults(),
+	node_box = cannons.stand_nodebox,
+	selection_box = {
+	type = "fixed",
+	fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+		},
+	}
+})	
+
 minetest.register_node("cannons:ball_wood", {
 	description = "Cannon Ball Wood",
 	stack_max = 99,
