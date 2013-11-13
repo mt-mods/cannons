@@ -137,11 +137,7 @@ minetest.register_craft({
 --++++++++++++++++++++++++++++++++++++
 --+ cannon stuff                     +
 --++++++++++++++++++++++++++++++++++++
-canons.formspec =
-	"size[8,9]"..
-	"list[current_name;gunpowder;2,3;1,1;]"..
-	"list[current_name;muni;2,1;1,1;]"..
-	"list[current_player;main;0,5;8,4;]"
+
 -- classic cannon --
 minetest.register_node("canons:canon", {
 		description = "Cannon",
@@ -153,33 +149,11 @@ minetest.register_node("canons:canon", {
 	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
-			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1}, -- plinth --
-			
-			-- side , top hight , depth , side , bottom, side,
-				
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9},
-			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1},
-		},
-	},
+	node_box = canons.nodebox,
+	on_place = canons.on_place,
+	selection_box = canons.nodebox,
 	on_punch = canons.punched,
-	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", canons.formspec)
-		meta:set_string("infotext", "Canon has no muni and no gunpowder")
-		local inv = meta:get_inventory()
-		inv:set_size("gunpowder", 1)
-		inv:set_size("muni", 1)
-		
-	end,
+	on_construct = canons.on_construct,
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);
 		local inv = meta:get_inventory()
@@ -214,33 +188,10 @@ minetest.register_node("canons:bronze_canon", {
 	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
-			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1}, -- plinth --
-			
-			-- side , top hight , depth , side , bottom, side,
-				
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9},
-			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1},
-		},
-	},
+	node_box = canons.nodebox,
+	selection_box = canons.nodebox,
 	on_punch = canons.punched,
-	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", canons.formspec)
-		meta:set_string("infotext", "Canon has no muni and no gunpowder")
-		local inv = meta:get_inventory()
-		inv:set_size("gunpowder", 1)
-		inv:set_size("muni", 1)
-		
-	end,
+	on_construct = canons.on_construct,
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);
 		local inv = meta:get_inventory()
@@ -274,25 +225,13 @@ minetest.register_node("canons:canon_stand", {
 	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}, -- bottom --
-			{-0.5, -0.5, -0.5, -0.35, 1.0, 0.5}, -- side left --
-			{0.35, -0.5, -0.5, 0.5, 1.0, 0.5}, -- side right --
-			{0.35, -0.5, -0.2, 0.5, 1.2, 0.5}, -- side right --
-			{-0.5, -0.5, -0.2, -0.35, 1.2, 0.5}, -- side left --
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
+	node_box = canons.stand_nodebox,
 	selection_box = {
-		type = "fixed",
-		fixed = {
+	type = "fixed",
+	fixed = {
 			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
 		},
-	},
+	}
 })	
 minetest.register_node("canons:canon_ball_wood", {
 	description = "Cannon Ball Wood",

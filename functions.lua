@@ -40,6 +40,7 @@ function canons.inventory_modified(pos)
 		meta:set_string("infotext","Canon is ready")
 	end		
 end
+
 canons.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
@@ -66,6 +67,53 @@ canons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_l
 			return 0
 		end
 	end
+canons.formspec =
+	"size[8,9]"..
+	"list[current_name;muni;2,1;1,1;] label[2,0.5;Muni:]"..
+	"list[current_name;gunpowder;2,3;1,1;] label[2,2.5;Gunpowder:]"..
+	"list[current_player;main;0,5;8,4;]"
+canons.disabled_formspec =
+	"size[8,9]"..
+	"label[2,0.5;Canon is Disabled. Place it on a canonstand to activate it]"..
+	"list[current_player;main;0,5;8,4;]"
+canons.on_construct = function(pos)
+	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
+	if node.name == "canons:canon_stand" then
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", canons.formspec)
+		meta:set_string("infotext", "Canon has no muni and no gunpowder")
+		local inv = meta:get_inventory()
+		inv:set_size("gunpowder", 1)
+		inv:set_size("muni", 1)
+	else
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", canons.disabled_formspec)
+		meta:set_string("infotext", "Canon is out of Order")
+	end
+end
+canons.nodebox = {
+		type = "fixed",
+		fixed = {
+			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
+			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1}, -- plinth --
+			
+			-- side , top hight , depth , side , bottom, side,
+				
+		}
+	}
+canons.stand_nodebox = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}, -- bottom --
+			{-0.5, -0.5, -0.5, -0.35, 1.0, 0.5}, -- side left --
+			{0.35, -0.5, -0.5, 0.5, 1.0, 0.5}, -- side right --
+			{0.35, -0.5, -0.2, 0.5, 1.2, 0.5}, -- side right --
+			{-0.5, -0.5, -0.2, -0.35, 1.2, 0.5}, -- side left --
+			
+			-- side , top , side , side , bottom, side,
+				
+		},
+	}
 function canons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
