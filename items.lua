@@ -2,27 +2,21 @@
 --+ Craft Items                      +
 --++++++++++++++++++++++++++++++++++++
 
-minetest.register_craftitem("canons:gunpowder", {
+minetest.register_craftitem("cannons:gunpowder", {
 	groups = {gunpowder=1},
 	description = "Gunpowder",
-	inventory_image = "canons_gunpowder.png"
+	inventory_image = "cannons_gunpowder.png"
 })
 
-minetest.register_craftitem("canons:salt", {
+minetest.register_craftitem("cannons:salt", {
 	description = "Salt",
-	inventory_image = "canons_salt.png"
+	inventory_image = "cannons_salt.png"
 })
 
-minetest.register_craftitem("canons:bucket_salt", {
+minetest.register_craftitem("cannons:bucket_salt", {
 	description = "Bucket with salt",
-	inventory_image = "canons_bucket_salt.png",
+	inventory_image = "cannons_bucket_salt.png",
 	stack_max = 300
-})
-
-
-minetest.register_craftitem("canons:stone_bullet", {
-	Description = "Stone Bullet",
-	inventory_image = "canons_bullet.png"
 })
 
 
@@ -32,27 +26,27 @@ minetest.register_craftitem("canons:stone_bullet", {
 
 minetest.register_craft({
     type = "shapeless",
-	output = 'canons:salt 12',
+	output = 'cannons:salt 12',
 	recipe = {
-		"canons:bucket_salt"
+		"cannons:bucket_salt"
 	},
 	replacements = {
-		{"canons:bucket_salt", "bucket:bucket_empty"}
+		{"cannons:bucket_salt", "bucket:bucket_empty"}
 	}
 })
 
 minetest.register_craft({
 	type = "cooking",
-	output = 'canons:bucket_salt',
+	output = 'cannons:bucket_salt',
 	recipe = 'bucket:bucket_water',
 	cooktime = 15
 })
 
 minetest.register_craft({
 	type = "shapeless",
-	output = 'canons:gunpowder',
+	output = 'cannons:gunpowder',
 	recipe = {
-		"default:coal_lump", "default:mese_crystal", "canons:salt"
+		"default:coal_lump", "default:mese_crystal", "cannons:salt"
 	},
 })
 
@@ -60,25 +54,25 @@ minetest.register_craft({
 -- new crafts --
 
 minetest.register_craft({
-	output = 'canons:canon',
+	output = 'cannons:cannon',
 	recipe = {
 		{"default:steelblock", "default:steelblock", "default:steelblock"},
-		{"canons:gunpowder", "default:mese_block", ""},
+		{"cannons:gunpowder", "default:mese_block", ""},
 		{"default:steelblock", "default:steelblock", "default:steelblock"}
 	},
 })
 
 minetest.register_craft({
-	output = 'canons:bronze_canon',
+	output = 'cannons:bronze_canon',
 	recipe = {
 		{"default:bronzeblock", "default:bronzeblock", "default:bronzeblock"},
-		{"canons:gunpowder", "default:mese_block", ""},
+		{"cannons:gunpowder", "default:mese_block", ""},
 		{"default:bronzeblock", "default:bronzeblock", "default:bronzeblock"}
 	},
 })
 
 minetest.register_craft({
-	output = 'canons:canon_stand',
+	output = 'cannons:stand',
 	recipe = {
 		{"default:wood", "", "default:wood"},
 		{"default:wood", "default:steelblock", "default:wood"},
@@ -88,50 +82,48 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "shapeless",
-	output = 'canons:canon_ball_steel_stack',
+	output = 'cannons:ball_steel_stack',
 	recipe = {
-		"canons:canon_ball_steel", "canons:canon_ball_steel", "canons:canon_ball_steel", "canons:canon_ball_steel"
+		"cannons:canon_ball_steel", "cannons:canon_ball_steel", "cannons:canon_ball_steel", "cannons:canon_ball_steel"
 	},
 })
 
 minetest.register_craft({
 	type = "shapeless",
-	output = 'canons:canon_ball_stone_stack',
+	output = 'cannons:ball_stone_stack',
 	recipe = {
-		"canons:canon_ball_stone", "canons:canon_ball_stone", "canons:canon_ball_stone", "canons:canon_ball_stone"
+		"cannons:canon_ball_stone", "cannons:canon_ball_stone", "cannons:canon_ball_stone", "cannons:canon_ball_stone"
 	},
 })
 
 minetest.register_craft({
 	type = "shapeless",
-	output = 'canons:canon_ball_wood_stack',
+	output = 'cannons:ball_wood_stack',
 	recipe = {
-		"canons:canon_ball_wood", "canons:canon_ball_wood", "canons:canon_ball_wood", "canons:canon_ball_wood"
+		"cannons:canon_ball_wood", "cannons:canon_ball_wood", "cannons:canon_ball_wood", "cannons:canon_ball_wood"
 	},
 })
 
 minetest.register_craft({
-	output = 'canons:canon_ball_wood 2',
+	output = 'cannons:ball_wood 2',
 	recipe = {
 		{"default:wood","default:wood"},
 	},
 })
 
 minetest.register_craft({
-	output = 'canons:canon_ball_stone',
+	output = 'cannons:ball_stone',
 	recipe = {
 		{"default:stone"},
 	},
 })
 
 minetest.register_craft({
-	output = 'canons:canon_ball_steel',
+	output = 'cannons:ball_steel',
 	recipe = {
 		{"default:steelblock"}
 	},
 })
-
--- silly crafts --
 
 
 --++++++++++++++++++++++++++++++++++++
@@ -139,21 +131,21 @@ minetest.register_craft({
 --++++++++++++++++++++++++++++++++++++
 
 -- classic cannon --
-minetest.register_node("canons:canon", {
+minetest.register_node("cannons:cannon", {
 		description = "Cannon",
 	stack_max = 1,
-	tiles = {"cannon_cannon_top.png","cannon_cannon_top.png","cannon_cannon_side.png","cannon_cannon_side.png","cannon_cannon_top.png^canons_canons_rim.png","cannon_cannon_side.png"},
+	tiles = {"cannon_cannon_top.png","cannon_cannon_top.png","cannon_cannon_side.png","cannon_cannon_side.png","cannon_cannon_top.png^cannons_rim.png","cannon_cannon_side.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = canons.nodebox,
-	on_place = canons.on_place,
-	selection_box = canons.nodebox,
-	on_punch = canons.punched,
-	on_construct = canons.on_construct,
+	node_box = cannons.nodebox,
+	on_place = cannons.on_place,
+	selection_box = cannons.nodebox,
+	on_punch = cannons.punched,
+	on_construct = cannons.on_construct,
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);
 		local inv = meta:get_inventory()
@@ -165,33 +157,33 @@ minetest.register_node("canons:canon", {
 			return true
 		end
 	end,
-	allow_metadata_inventory_put = canons.allow_metadata_inventory_put,
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
 	
-	allow_metadata_inventory_move = canons.allow_metadata_inventory_move,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
 	
-	on_metadata_inventory_put = canons.inventory_modified,
+	on_metadata_inventory_put = cannons.inventory_modified,
 	
-	on_metadata_inventory_take = canons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
 	
-	on_metadata_inventory_move = canons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
 	
 })
 
 -- bronze cannon --
-minetest.register_node("canons:bronze_canon", {
+minetest.register_node("cannons:bronze_canon", {
 		description = "Cannon (bronze)",
 	stack_max = 1,
-	tiles = {"cannon_bronze_cannon_top.png","cannon_bronze_cannon_top.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_top.png^canons_canons_rim.png","cannon_bronze_cannon_side.png"},
+	tiles = {"cannon_bronze_cannon_top.png","cannon_bronze_cannon_top.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_top.png^cannons_rim.png","cannon_bronze_cannon_side.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = canons.nodebox,
-	selection_box = canons.nodebox,
-	on_punch = canons.punched,
-	on_construct = canons.on_construct,
+	node_box = cannons.nodebox,
+	selection_box = cannons.nodebox,
+	on_punch = cannons.punched,
+	on_construct = cannons.on_construct,
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);
 		local inv = meta:get_inventory()
@@ -203,29 +195,29 @@ minetest.register_node("canons:bronze_canon", {
 			return true
 		end
 	end,
-	allow_metadata_inventory_put = canons.allow_metadata_inventory_put,
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
 
-	allow_metadata_inventory_move = canons.allow_metadata_inventory_move,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
 	
-	on_metadata_inventory_put = canons.inventory_modified,
+	on_metadata_inventory_put = cannons.inventory_modified,
 	
-	on_metadata_inventory_take = canons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
 	
-	on_metadata_inventory_move = canons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
 	
 })
 
-minetest.register_node("canons:canon_stand", {
+minetest.register_node("cannons:stand", {
 	description = "Cannon Stand",
 	stack_max = 99,
-	tiles = {"default_junglewood.png","default_junglewood.png^canons_canons_rim.png","default_junglewood.png^canons_canons_rim.png","default_junglewood.png^canons_canons_rim.png","default_cobble.png","default_junglewood.png^canons_canons_rim.png"},
+	tiles = {"default_junglewood.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_cobble.png","default_junglewood.png^cannons_rim.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = canons.stand_nodebox,
+	node_box = cannons.stand_nodebox,
 	selection_box = {
 	type = "fixed",
 	fixed = {
@@ -233,7 +225,7 @@ minetest.register_node("canons:canon_stand", {
 		},
 	}
 })	
-minetest.register_node("canons:canon_ball_wood", {
+minetest.register_node("cannons:ball_wood", {
 	description = "Cannon Ball Wood",
 	stack_max = 99,
 	tiles = {"default_wood.png"},
@@ -260,7 +252,7 @@ minetest.register_node("canons:canon_ball_wood", {
 	},
 })
 
-minetest.register_node("canons:canon_ball_stone", {
+minetest.register_node("cannons:ball_stone", {
 	description = "Cannon Ball Stone",
 	stack_max = 99,
 	tiles = {"default_stone.png"},
@@ -287,7 +279,7 @@ minetest.register_node("canons:canon_ball_stone", {
 	},
 })
 
-minetest.register_node("canons:canon_ball_steel", {
+minetest.register_node("cannons:ball_steel", {
 	description = "Cannon Ball Steel",
 	stack_max = 99,
 	tiles = {"cannon_cannon_top.png"},
@@ -314,12 +306,12 @@ minetest.register_node("canons:canon_ball_steel", {
 	},
 })
 	
-minetest.register_node("canons:canon_ball_wood_stack", {
+minetest.register_node("cannons:ball_wood_stack", {
 	description = "Cannon Ball Wood Stack",
 	stack_max = 99,
 	tiles = {"default_wood.png"},
 	drawtype = "nodebox",
-	drop = 'canons:canon_ball_wood 4',
+	drop = 'cannons:ball_wood 4',
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = true,
@@ -352,12 +344,12 @@ minetest.register_node("canons:canon_ball_wood_stack", {
 })
 	
 
-minetest.register_node("canons:canon_ball_stone_stack", {
+minetest.register_node("cannons:ball_stone_stack", {
 	description = "Cannon Ball Stone Stack",
 	stack_max = 99,
 	tiles = {"default_stone.png"},
 	drawtype = "nodebox",
-	drop = 'canons:canon_ball_stone 4',
+	drop = 'cannons:ball_stone 4',
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = true,
@@ -389,12 +381,12 @@ minetest.register_node("canons:canon_ball_stone_stack", {
 	},
 })
 
-minetest.register_node("canons:canon_ball_steel_stack", {
+minetest.register_node("cannons:canon_ball_steel_stack", {
 	description = "Cannon Ball Steel Stack",
 	stack_max = 99,
 	tiles = {"cannon_cannon_top.png"},
 	drawtype = "nodebox",
-	drop = 'canons:canon_ball_steel 4',
+	drop = 'cannons:ball_steel 4',
 	paramtype = "light",
 	paramtype2 = "facedir",
 	is_ground_content = true,

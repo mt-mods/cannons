@@ -9,8 +9,8 @@
 
 -- enable/disable the muni wich makes things burning if it hit them.
 -- if you want to dissable it just set it to false:
-canons.enable_fire = true
+cannons.enable_fire = true
 
 -- enable/disable the muni wich destroyes nodesif it hit them.
 -- if you want to dissable it just set it to false:
-canons.enable_explosion = true
+cannons.enable_explosion = true

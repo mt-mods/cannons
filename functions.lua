@@ -1,5 +1,5 @@
 
-function canons.destroy(pos,range)
+function cannons.destroy(pos,range)
 	for x=-range,range do
 	for y=-range,range do
 	for z=-range,range do
@@ -15,7 +15,7 @@ function canons.destroy(pos,range)
 	end
 end
 
-function canons.inventory_modified(pos)
+function cannons.inventory_modified(pos)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 	local stack = inv:get_stack("muni", 1)
@@ -23,75 +23,75 @@ function canons.inventory_modified(pos)
 	if muni == nil then
 		muni = false
 	else
-		muni = canons.is_muni(muni.name)
+		muni = cannons.is_muni(muni.name)
 	end
 	
-	local gunpowder = inv:contains_item("gunpowder","canons:gunpowder 1")
+	local gunpowder = inv:contains_item("gunpowder","cannons:gunpowder 1")
 	if not muni and not gunpowder then
-		meta:set_string("infotext","Canon has no muni and no gunpowder")
+		meta:set_string("infotext","Cannon has no muni and no gunpowder")
 	
 	elseif not muni then
-		meta:set_string("infotext","Canon has no muni")
+		meta:set_string("infotext","Cannon has no muni")
 	
 	elseif not gunpowder then
-		meta:set_string("infotext","Canon has no gunpowder")
+		meta:set_string("infotext","Cannon has no gunpowder")
 		
 	else
-		meta:set_string("infotext","Canon is ready")
+		meta:set_string("infotext","Cannon is ready")
 	end		
 end
 
-canons.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+cannons.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		stack = stack:to_table()
-		if listname == "gunpowder" and stack.name == "canons:gunpowder" then	
+		if listname == "gunpowder" and stack.name == "cannons:gunpowder" then	
 			return stack.count
-		elseif listname == "muni" and canons.is_muni(stack.name) then	
+		elseif listname == "muni" and cannons.is_muni(stack.name) then	
 			return stack.count
 		else return 0
 		end
 
 	end
-canons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+cannons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		local stack = inv:get_stack(from_list, from_index)
 		stack = stack:to_table()
-		if to_list == "gunpowder" and stack.name == "canons:gunpowder" then
+		if to_list == "gunpowder" and stack.name == "cannons:gunpowder" then
 			return count
 		
-		elseif to_list == "muni" and  canons.is_muni(stack.name) then
+		elseif to_list == "muni" and  cannons.is_muni(stack.name) then
 			return count
 		else
 			return 0
 		end
 	end
-canons.formspec =
+cannons.formspec =
 	"size[8,9]"..
 	"list[current_name;muni;2,1;1,1;] label[2,0.5;Muni:]"..
 	"list[current_name;gunpowder;2,3;1,1;] label[2,2.5;Gunpowder:]"..
 	"list[current_player;main;0,5;8,4;]"
-canons.disabled_formspec =
+cannons.disabled_formspec =
 	"size[8,9]"..
 	"label[2,0.5;Canon is Disabled. Place it on a canonstand to activate it]"..
 	"list[current_player;main;0,5;8,4;]"
-canons.on_construct = function(pos)
+cannons.on_construct = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
-	if node.name == "canons:canon_stand" then
+	if node.name == "cannons:stand" then
 		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", canons.formspec)
+		meta:set_string("formspec", cannons.formspec)
 		meta:set_string("infotext", "Canon has no muni and no gunpowder")
 		local inv = meta:get_inventory()
 		inv:set_size("gunpowder", 1)
 		inv:set_size("muni", 1)
 	else
 		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", canons.disabled_formspec)
+		meta:set_string("formspec", cannons.disabled_formspec)
 		meta:set_string("infotext", "Canon is out of Order")
 	end
 end
-canons.nodebox = {
+cannons.nodebox = {
 		type = "fixed",
 		fixed = {
 			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
@@ -101,7 +101,7 @@ canons.nodebox = {
 				
 		}
 	}
-canons.stand_nodebox = {
+cannons.stand_nodebox = {
 		type = "fixed",
 		fixed = {
 			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}, -- bottom --
@@ -114,34 +114,34 @@ canons.stand_nodebox = {
 				
 		},
 	}
-function canons.fire(pos,node,puncher)
+function cannons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 	local stack = inv:get_stack("muni", 1)
 	local muni = stack:to_table()
-	if inv:contains_item("gunpowder","canons:gunpowder 1") 
+	if inv:contains_item("gunpowder","cannons:gunpowder 1") 
 	and muni ~= nil 
-	and canons.is_muni(muni.name) 
+	and cannons.is_muni(muni.name) 
 	and inv:contains_item("muni",muni.name.." 1") 
 	
 	then
-		minetest.sound_play("canons_shot",
+		minetest.sound_play("cannons_shot",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 		
 
 		inv:remove_item("muni", muni.name.." 1")
-		inv:remove_item("gunpowder", "canons:gunpowder 1")
-		canons.inventory_modified(pos)
-		local settings = canons.get_settings(muni.name)
+		inv:remove_item("gunpowder", "cannons:gunpowder 1")
+		cannons.inventory_modified(pos)
+		local settings = cannons.get_settings(muni.name)
 		local playerpos=puncher:getpos()
-		local obj=minetest.env:add_entity(pos, canons.get_entity(muni.name))
+		local obj=minetest.env:add_entity(pos, cannons.get_entity(muni.name))
 		local dir=puncher:get_look_dir()
 		obj:setvelocity({x=dir.x*settings.velocity, y=-1, z=dir.z*settings.velocity})
 		obj:setacceleration({x=dir.x*-3, y=-settings.gravity, z=dir.z*-3})
 	end
 end
 
-function canons.punched(pos, node, puncher)
+function cannons.punched(pos, node, puncher)
 	if not puncher or not node then
 		return
 	end
@@ -151,20 +151,20 @@ function canons.punched(pos, node, puncher)
 	end
 	wield = wield:get_name()
 	if wield and wield == 'default:torch' then
-		canons.fire(pos,node,puncher)
+		cannons.fire(pos,node,puncher)
 	end
 end
 
 --++++++++++++++++++++++++++++++++++++
---+ canons.register_muni             +
+--+ cannons.register_muni             +
 --++++++++++++++++++++++++++++++++++++
 
-canons.registered_muni = {}
+cannons.registered_muni = {}
 
-function canons.register_muni(node,entity)
-	canons.registered_muni[node] = {}
-	canons.registered_muni[node].entity = entity
-	canons.registered_muni[node].entity.on_step = function(self, dtime)
+function cannons.register_muni(node,entity)
+	cannons.registered_muni[node] = {}
+	cannons.registered_muni[node].entity = entity
+	cannons.registered_muni[node].entity.on_step = function(self, dtime)
 		self.timer=self.timer+dtime
 		--pr(self.timer,"Timer")
 		if self.timer >= 0.3 then --easiesst less laggiest way to find out that it left his start position
@@ -190,18 +190,18 @@ function canons.register_muni(node,entity)
 			self.lastpos={x=pos.x, y=pos.y, z=pos.z}
 		end	
 	end
-	canons.registered_muni[node].obj = entity.name
-	minetest.register_entity(entity.name, canons.registered_muni[node].entity)
+	cannons.registered_muni[node].obj = entity.name
+	minetest.register_entity(entity.name, cannons.registered_muni[node].entity)
 end
 
-function canons.is_muni(node)
-	return canons.registered_muni[node] ~= nil		
+function cannons.is_muni(node)
+	return cannons.registered_muni[node] ~= nil		
 end
-function canons.get_entity(node)
-	return canons.registered_muni[node].obj		
+function cannons.get_entity(node)
+	return cannons.registered_muni[node].obj		
 end
-function canons.get_settings(node)
-	return canons.registered_muni[node].entity		
+function cannons.get_settings(node)
+	return cannons.registered_muni[node].entity		
 end
 
 local apple={
@@ -213,7 +213,7 @@ local apple={
 	range=2,
 	gravity=10,
 	velocity=30,
-	name="canons:apple",
+	name="cannons:apple",
 	collisionbox = {-0.25,-0.25,-0.25, 0.25,0.25,0.25},
 	on_player_hit = function(self,pos,player)
 		local playername = player:get_player_name()
@@ -236,4 +236,4 @@ local apple={
 	end,
 
 }
-canons.register_muni("default:apple",apple)
+cannons.register_muni("default:apple",apple)
