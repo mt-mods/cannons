@@ -84,7 +84,7 @@ minetest.register_craft({
 	type = "shapeless",
 	output = 'cannons:ball_steel_stack',
 	recipe = {
-		"cannons:canon_ball_steel", "cannons:canon_ball_steel", "cannons:canon_ball_steel", "cannons:canon_ball_steel"
+		"cannons:ball_steel", "cannons:ball_steel", "cannons:ball_steel", "cannons:ball_steel"
 	},
 })
 
@@ -92,7 +92,7 @@ minetest.register_craft({
 	type = "shapeless",
 	output = 'cannons:ball_stone_stack',
 	recipe = {
-		"cannons:canon_ball_stone", "cannons:canon_ball_stone", "cannons:canon_ball_stone", "cannons:canon_ball_stone"
+		"cannons:ball_stone", "cannons:ball_stone", "cannons:ball_stone", "cannons:ball_stone"
 	},
 })
 
@@ -100,7 +100,7 @@ minetest.register_craft({
 	type = "shapeless",
 	output = 'cannons:ball_wood_stack',
 	recipe = {
-		"cannons:canon_ball_wood", "cannons:canon_ball_wood", "cannons:canon_ball_wood", "cannons:canon_ball_wood"
+		"cannons:ball_wood", "cannons:ball_wood", "cannons:ball_wood", "cannons:ball_wood"
 	},
 })
 
