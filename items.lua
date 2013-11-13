@@ -138,7 +138,6 @@ minetest.register_node("cannons:cannon", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = cannons.nodebox,
@@ -177,7 +176,6 @@ minetest.register_node("cannons:bronze_canon", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = cannons.nodebox,
@@ -214,7 +212,6 @@ minetest.register_node("cannons:stand", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = cannons.stand_nodebox,
@@ -232,7 +229,6 @@ minetest.register_node("cannons:ball_wood", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
@@ -259,7 +255,6 @@ minetest.register_node("cannons:ball_stone", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
@@ -286,7 +281,6 @@ minetest.register_node("cannons:ball_steel", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
@@ -314,7 +308,6 @@ minetest.register_node("cannons:ball_wood_stack", {
 	drop = 'cannons:ball_wood 4',
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
@@ -352,7 +345,6 @@ minetest.register_node("cannons:ball_stone_stack", {
 	drop = 'cannons:ball_stone 4',
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
@@ -389,7 +381,6 @@ minetest.register_node("cannons:canon_ball_steel_stack", {
 	drop = 'cannons:ball_steel 4',
 	paramtype = "light",
 	paramtype2 = "facedir",
-	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = {
