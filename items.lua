@@ -114,9 +114,11 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'cannons:ball_wood 2',
+	output = 'cannons:ball_wood 5',
 	recipe = {
-		{"default:wood","default:wood"},
+		{"","default:wood",""},
+		{"default:wood","default:wood","default:wood"},
+		{"","default:wood",""},
 	},
 })
 
@@ -133,8 +135,26 @@ minetest.register_craft({
 		{"default:steelblock"}
 	},
 })
-
-
+if cannons.enable_explosion then
+minetest.register_craft({
+	output = 'cannons:ball_exploding 2',
+	recipe = {
+		{"","default:mese",""},
+		{"default:mese","cannons:gunpowder","default:mese"},
+		{"","default:mese",""},
+	},
+})
+end
+if cannons.enable_fire then
+minetest.register_craft({
+	output = 'cannons:ball_fire 2',
+	recipe = {
+		{"","default:wood",""},
+		{"default:wood","default:torch","default:wood"},
+		{"","default:wood",""},
+	},
+})
+end
 --++++++++++++++++++++++++++++++++++++
 --+ cannon stuff                     +
 --++++++++++++++++++++++++++++++++++++
@@ -249,6 +269,9 @@ minetest.register_node("cannons:stand_wood", {
 		},
 	}
 })	
+--++++++++++++++++++++++++++++++++++++
+--+ cannon balls                     +
+--++++++++++++++++++++++++++++++++++++
 
 minetest.register_node("cannons:ball_wood", {
 	description = "Cannon Ball Wood",
@@ -327,7 +350,60 @@ minetest.register_node("cannons:ball_steel", {
 		},
 	},
 })
-	
+if cannons.enable_explosion then
+minetest.register_node("cannons:ball_exploding", {
+	description = "Exploding Cannon Ball",
+	stack_max = 99,
+	tiles = {"default_mese.png"},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=2},
+	sounds = default.node_sound_wood_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
+			
+			-- side , top , side , side , bottom, side,
+				
+		},
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
+		},
+	},
+})
+end
+if cannons.enable_fire then
+minetest.register_node("cannons:ball_fire", {
+	description = "Burning Cannon Ball",
+	stack_max = 99,
+	tiles = {"default_tree.png"},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=2},
+	sounds = default.node_sound_wood_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
+			
+			-- side , top , side , side , bottom, side,
+				
+		},
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
+		},
+	},
+})
+end	
 minetest.register_node("cannons:ball_wood_stack", {
 	description = "Cannon Ball Wood Stack",
 	stack_max = 99,

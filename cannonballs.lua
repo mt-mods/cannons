@@ -1,7 +1,7 @@
 --++++++++++++++++++++++++++++++++++++
 --+ Meseball                         +
 --++++++++++++++++++++++++++++++++++++
-local mese={
+local exploding={
 	physical = false,
 	timer=0,
 	textures = {"default_mese_block.png","default_mese_block.png","default_mese_block.png","default_mese_block.png","default_mese_block.png","default_mese_block.png"},
@@ -12,7 +12,7 @@ local mese={
 	range=1,
 	gravity=10,
 	velocity=30,
-	name="cannons:mese_bullet",
+	name="cannons:exploding_bullet",
 	collisionbox = {-0.25,-0.25,-0.25, 0.25,0.25,0.25},
 	on_player_hit = function(self,pos,player)
 		local playername = player:get_player_name()
@@ -38,10 +38,9 @@ local mese={
 
 }
 if cannons.enable_explosion then
-	cannons.register_muni("default:mese",mese)
+	cannons.register_muni("cannons:ball_exploding",exploding)
 end
-
-local tree={
+local fire={
 	physical = false,
 	timer=0,
 	textures = {"default_tree.png","default_tree.png","default_tree.png","default_tree.png","default_tree.png","default_tree.png"},
@@ -52,7 +51,7 @@ local tree={
 	range=2,
 	gravity=8,
 	velocity=35,
-	name="cannons:tree_bullet",
+	name="cannons:fire_bullet",
 	collisionbox = {-0.25,-0.25,-0.25, 0.25,0.25,0.25},
 	on_player_hit = function(self,pos,player)
 		local playername = player:get_player_name()
@@ -75,7 +74,7 @@ local tree={
 
 }
 if cannons.enable_fire then
-	cannons.register_muni("default:tree",tree)
+	cannons.register_muni("cannons:ball_fire",fire)
 end
 
 --++++++++++++++++++++++++++++++++++++
