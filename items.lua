@@ -237,11 +237,11 @@ minetest.register_node("cannons:bronze_canon", {
 minetest.register_node("cannons:stand", {
 	description = "Cannon Stand",
 	stack_max = 99,
-	tiles = {"default_junglewood.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_cobble.png","default_junglewood.png^cannons_rim.png"},
+	tiles = {"default_junglewood.png","default_cobble.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_cobble.png","default_junglewood.png^cannons_rim.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=2},
+	groups = {cracky=2,cannonstand=1},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = cannons.stand_nodebox,
 	selection_box = {
@@ -255,11 +255,11 @@ minetest.register_node("cannons:stand", {
 minetest.register_node("cannons:stand_wood", {
 	description = "Cannon Stand",
 	stack_max = 99,
-	tiles = {"default_junglewood.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_wood.png","default_junglewood.png^cannons_rim.png"},
+	tiles = {"default_junglewood.png","default_wood.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_wood.png","default_junglewood.png^cannons_rim.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=2},
+	groups = {cracky=2,cannonstand=1},
 	sounds = default.node_sound_wood_defaults(),
 	node_box = cannons.stand_nodebox,
 	selection_box = {

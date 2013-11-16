@@ -74,21 +74,22 @@ cannons.formspec =
 	"list[current_player;main;0,5;8,4;]"
 cannons.disabled_formspec =
 	"size[8,9]"..
-	"label[2,0.5;Canon is Disabled. Place it on a canonstand to activate it]"..
+	"label[2,0.5;Cannon is Disabled. Place it on a cannonstand to activate it]"..
 	"list[current_player;main;0,5;8,4;]"
 cannons.on_construct = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
-	if node.name == "cannons:stand" then
+	--pr(minetest.registered_nodes[node.name])
+	if minetest.registered_nodes[node.name].groups.cannonstand then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.formspec)
-		meta:set_string("infotext", "Canon has no muni and no gunpowder")
+		meta:set_string("infotext", "Cannon has no muni and no gunpowder")
 		local inv = meta:get_inventory()
 		inv:set_size("gunpowder", 1)
 		inv:set_size("muni", 1)
 	else
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.disabled_formspec)
-		meta:set_string("infotext", "Canon is out of Order")
+		meta:set_string("infotext", "Cannon is out of order")
 	end
 end
 cannons.nodebox = {
