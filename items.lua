@@ -235,7 +235,7 @@ minetest.register_node("cannons:bronze_canon", {
 })
 
 minetest.register_node("cannons:stand", {
-	description = "Cannon Stand",
+	description = "stone cannon stand",
 	stack_max = 99,
 	tiles = {"default_junglewood.png","default_cobble.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_cobble.png","default_junglewood.png^cannons_rim.png"},
 	drawtype = "nodebox",
@@ -253,7 +253,7 @@ minetest.register_node("cannons:stand", {
 })	
 
 minetest.register_node("cannons:stand_wood", {
-	description = "Cannon Stand",
+	description = "wooden cannon stand",
 	stack_max = 99,
 	tiles = {"default_junglewood.png","default_wood.png","default_junglewood.png^cannons_rim.png","default_junglewood.png^cannons_rim.png","default_wood.png","default_junglewood.png^cannons_rim.png"},
 	drawtype = "nodebox",
