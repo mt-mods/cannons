@@ -173,6 +173,11 @@ minetest.register_node("cannons:cannon", {
 	on_place = cannons.on_place,
 	selection_box = cannons.nodebox,
 	on_punch = cannons.punched,
+	mesecons = {effector = {
+		rules = cannons.rules,
+		action_on = cannons.meseconsfire,
+		}
+	},
 	on_construct = cannons.on_construct,
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);
@@ -210,6 +215,11 @@ minetest.register_node("cannons:bronze_canon", {
 	node_box = cannons.nodebox,
 	selection_box = cannons.nodebox,
 	on_punch = cannons.punched,
+	mesecons = {effector = {
+		rules = cannons.rules,
+		action_on = cannons.meseconsfire,
+		}
+	},
 	on_construct = cannons.on_construct,
 	can_dig = function(pos,player)
 		local meta = minetest.get_meta(pos);

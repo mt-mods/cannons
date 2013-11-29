@@ -115,17 +115,37 @@ cannons.stand_nodebox = {
 				
 		},
 	}
+	cannons.rules =
+		{{x = 1, y = 0, z = 0},
+ {x =-1, y = 0, z = 0},
+ {x = 0, y = 0, z = 1},
+ {x = 0, y = 0, z =-1}}
+function cannons.meseconsfire(pos,node)
+	cannons.fire(pos,node)
+end
 function cannons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 	local stack = inv:get_stack("muni", 1)
 	local muni = stack:to_table()
 	if inv:contains_item("gunpowder","cannons:gunpowder 1") 
-	and muni ~= nil 
-	and cannons.is_muni(muni.name) 
-	and inv:contains_item("muni",muni.name.." 1") 
+		and muni ~= nil 
+		and cannons.is_muni(muni.name) 
+		and inv:contains_item("muni",muni.name.." 1") 
 	
-	then
+	then 
+		if puncher ~= nil then
+			dir=puncher:get_look_dir()
+			meta:set_string("dir", minetest.serialize(dir))
+			pr(dir)
+		else
+			dir = {}
+			dir = minetest.deserialize(meta:get_string("dir"));
+			if dir == nil then
+				return
+			end
+			pr(dir)
+		end	
 		minetest.sound_play("cannons_shot",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 		
@@ -133,10 +153,10 @@ function cannons.fire(pos,node,puncher)
 		inv:remove_item("muni", muni.name.." 1")
 		inv:remove_item("gunpowder", "cannons:gunpowder 1")
 		cannons.inventory_modified(pos)
+
+
 		local settings = cannons.get_settings(muni.name)
-		local playerpos=puncher:getpos()
 		local obj=minetest.env:add_entity(pos, cannons.get_entity(muni.name))
-		local dir=puncher:get_look_dir()
 		obj:setvelocity({x=dir.x*settings.velocity, y=-1, z=dir.z*settings.velocity})
 		obj:setacceleration({x=dir.x*-3, y=-settings.gravity, z=dir.z*-3})
 	end
