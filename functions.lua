@@ -123,6 +123,24 @@ cannons.stand_nodebox = {
 function cannons.meseconsfire(pos,node)
 	cannons.fire(pos,node)
 end
+function cannons.nodehitparticles(pos,texture)
+	minetest.add_particlespawner(
+        30, --amount
+        0.5, --time
+        {x=pos.x-0.3, y=pos.y+0.3, z=pos.z-0.3}, --minpos
+        {x=pos.x+0.3, y=pos.y+0.5, z=pos.z+0.3}, --maxpos
+        {x=0, y=2, z=0}, --minvel
+        {x=0, y=3, z=0}, --maxvel
+        {x=-4,y=-4,z=-4}, --minacc
+        {x=4,y=-4,z=4}, --maxacc
+        0.1, --minexptime
+        1, --maxexptime
+        1, --minsize
+        3, --maxsize
+        false, --collisiondetection
+        texture --texture
+    )
+end
 function cannons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
@@ -137,14 +155,12 @@ function cannons.fire(pos,node,puncher)
 		if puncher ~= nil then
 			dir=puncher:get_look_dir()
 			meta:set_string("dir", minetest.serialize(dir))
-			pr(dir)
 		else
 			dir = {}
 			dir = minetest.deserialize(meta:get_string("dir"));
 			if dir == nil then
 				return
 			end
-			pr(dir)
 		end	
 		minetest.sound_play("cannons_shot",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
@@ -159,6 +175,13 @@ function cannons.fire(pos,node,puncher)
 		local obj=minetest.env:add_entity(pos, cannons.get_entity(muni.name))
 		obj:setvelocity({x=dir.x*settings.velocity, y=-1, z=dir.z*settings.velocity})
 		obj:setacceleration({x=dir.x*-3, y=-settings.gravity, z=dir.z*-3})
+		minetest.add_particlespawner(50,0.5,
+    pos, pos,
+    {x=dir.x*settings.velocity, y=-1, z=dir.z*settings.velocity}, {x=dir.x*settings.velocity/2, y=-1, z=dir.z*settings.velocity/2},
+    {x=dir.x*-3/4, y=-settings.gravity*2, z=dir.z*-3/4}, {x=dir.x*-3/2, y=-settings.gravity, z=dir.z*-3/2},
+    0.1, 0.5,--time
+    0.5, 1,
+    false, "cannons_gunpowder.png")
 	end
 end
 
