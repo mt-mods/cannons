@@ -364,7 +364,7 @@ if cannons.enable_explosion then
 minetest.register_node("cannons:ball_exploding", {
 	description = "Exploding Cannon Ball",
 	stack_max = 99,
-	tiles = {"default_mese.png"},
+	tiles = {"default_mese_block.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
