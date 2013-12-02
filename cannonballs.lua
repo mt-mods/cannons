@@ -66,7 +66,7 @@ local fire={
 		self.object:remove()
 	end,
 	on_node_hit = function(self,pos,node)
-	cannons.nodehitparticles(pos,minetest.registered_nodes[node.name].tiles[1])
+	cannons.nodehitparticles(pos,node)
 		pos = self.lastpos
 		minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="fire:basic_flame"})
 		minetest.sound_play("default_break_glass",
@@ -112,7 +112,7 @@ local ball_wood={
 		self.object:remove()
 	end,
 	on_node_hit = function(self,pos,node)
-	cannons.nodehitparticles(pos,minetest.registered_nodes[node.name].tiles[1])
+	cannons.nodehitparticles(pos,node)
 		if node.name == "default:dirt_with_grass" then			
 			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
 			minetest.sound_play("cannons_hit",
@@ -165,7 +165,7 @@ local ball_stone={
 		self.object:remove()
 	end,
 	on_node_hit = function(self,pos,node)
-	cannons.nodehitparticles(pos,minetest.registered_nodes[node.name].tiles[1])
+	cannons.nodehitparticles(pos,node)
 		if node.name == "default:dirt_with_grass" then			
 			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
 			minetest.sound_play("cannons_hit",
@@ -218,7 +218,7 @@ local ball_steel={
 		self.object:remove()
 	end,
 	on_node_hit = function(self,pos,node)
-	cannons.nodehitparticles(pos,minetest.registered_nodes[node.name].tiles[1])
+	cannons.nodehitparticles(pos,node)
 		if node.name == "default:dirt_with_grass" then			
 			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
 			minetest.sound_play("cannons_hit",

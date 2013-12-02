@@ -20,6 +20,10 @@ function cannons.inventory_modified(pos)
 	local inv = meta:get_inventory()
 	local stack = inv:get_stack("muni", 1)
 	local muni = stack:to_table()
+	local addition = ""
+	if  meta:get_string("owner") ~="" then
+		addition = " (owned by "..meta:get_string("owner")..")"
+	end
 	if muni == nil then
 		muni = false
 	else
@@ -28,21 +32,26 @@ function cannons.inventory_modified(pos)
 	
 	local gunpowder = inv:contains_item("gunpowder","cannons:gunpowder 1")
 	if not muni and not gunpowder then
-		meta:set_string("infotext","Cannon has no muni and no gunpowder")
+		meta:set_string("infotext","Cannon has no muni and no gunpowder"..addition)
 	
 	elseif not muni then
-		meta:set_string("infotext","Cannon has no muni")
+		meta:set_string("infotext","Cannon has no muni"..addition)
 	
 	elseif not gunpowder then
-		meta:set_string("infotext","Cannon has no gunpowder")
+		meta:set_string("infotext","Cannon has no gunpowder"..addition)
 		
 	else
-		meta:set_string("infotext","Cannon is ready")
+		meta:set_string("infotext","Cannon is ready"..addition)
 	end		
 end
 
 cannons.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		
 		local meta = minetest.get_meta(pos)
+		--pr(meta:get_string("owner"))
+		if(meta:get_string("owner") ~="" and not( locks:lock_allow_use( pos, player ))) then
+		   return 0;
+		end
 		local inv = meta:get_inventory()
 		stack = stack:to_table()
 		if listname == "gunpowder" and stack.name == "cannons:gunpowder" then	
@@ -54,7 +63,12 @@ cannons.allow_metadata_inventory_put = function(pos, listname, index, stack, pla
 
 	end
 cannons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+
 		local meta = minetest.get_meta(pos)
+		pr(meta:get_string("owner"))
+		if(meta:get_string("owner") ~="" and not( locks:lock_allow_use( pos, player ))) then
+		   return 0;
+		end
 		local inv = meta:get_inventory()
 		local stack = inv:get_stack(from_list, from_index)
 		stack = stack:to_table()
@@ -69,8 +83,8 @@ cannons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_
 	end
 cannons.formspec =
 	"size[8,9]"..
-	"list[current_name;muni;2,1;1,1;] label[2,0.5;Muni:]"..
-	"list[current_name;gunpowder;2,3;1,1;] label[2,2.5;Gunpowder:]"..
+	"list[current_name;muni;0,1;1,1;] label[0,0.5;Muni:]"..
+	"list[current_name;gunpowder;0,3;1,1;] label[0,2.5;Gunpowder:]"..
 	"list[current_player;main;0,5;8,4;]"
 cannons.disabled_formspec =
 	"size[8,9]"..
@@ -82,6 +96,24 @@ cannons.on_construct = function(pos)
 	if minetest.registered_nodes[node.name].groups.cannonstand then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.formspec)
+		meta:set_string("infotext", "Cannon has no muni and no gunpowder")
+		local inv = meta:get_inventory()
+		inv:set_size("gunpowder", 1)
+		inv:set_size("muni", 1)
+	else
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", cannons.disabled_formspec)
+		meta:set_string("infotext", "Cannon is out of order")
+	end
+end
+cannons.on_construct_locks = function(pos)
+	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
+	--pr(minetest.registered_nodes[node.name])
+	if minetest.registered_nodes[node.name].groups.cannonstand then
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", cannons.formspec..
+									"field[2,1.3;6,0.7;locks_sent_lock_command;Locked Cannon. Type /help for help:;]"..
+									"button[6,2;1.7,0.7;locks_sent_input;Proceed]")
 		meta:set_string("infotext", "Cannon has no muni and no gunpowder")
 		local inv = meta:get_inventory()
 		inv:set_size("gunpowder", 1)
@@ -123,7 +155,10 @@ cannons.stand_nodebox = {
 function cannons.meseconsfire(pos,node)
 	cannons.fire(pos,node)
 end
-function cannons.nodehitparticles(pos,texture)
+function cannons.nodehitparticles(pos,node)
+pr(type(minetest.registered_nodes[node.name].tiles))
+if type(minetest.registered_nodes[node.name]) == "table" and type(minetest.registered_nodes[node.name].tiles) == "table" and type(minetest.registered_nodes[node.name].tiles[1])== "string" then
+local texture = minetest.registered_nodes[node.name].tiles[1]
 	minetest.add_particlespawner(
         30, --amount
         0.5, --time
@@ -140,6 +175,7 @@ function cannons.nodehitparticles(pos,texture)
         false, --collisiondetection
         texture --texture
     )
+	end
 end
 function cannons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
