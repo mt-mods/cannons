@@ -239,6 +239,8 @@ cannons.registered_muni = {}
 function cannons.register_muni(node,entity)
 	cannons.registered_muni[node] = {}
 	cannons.registered_muni[node].entity = entity
+	local name = node:split(":")
+	cannons.registered_muni[node].entity.name ="cannons:entity_"..name[1].."_"..name[2]
 	cannons.registered_muni[node].entity.on_step = function(self, dtime)
 		self.timer=self.timer+dtime
 		if self.timer >= 0.3 then --easiesst less laggiest way to find out that it left his start position
@@ -287,7 +289,6 @@ local apple={
 	range=2,
 	gravity=10,
 	velocity=30,
-	name="cannons:apple",
 	collisionbox = {-0.25,-0.25,-0.25, 0.25,0.25,0.25},
 	on_player_hit = function(self,pos,player)
 		local playername = player:get_player_name()
