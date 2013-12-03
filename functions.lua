@@ -48,7 +48,6 @@ end
 cannons.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		
 		local meta = minetest.get_meta(pos)
-		--pr(meta:get_string("owner"))
 		if(meta:get_string("owner") ~="" and not( locks:lock_allow_use( pos, player ))) then
 		   return 0;
 		end
@@ -65,7 +64,6 @@ cannons.allow_metadata_inventory_put = function(pos, listname, index, stack, pla
 cannons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 
 		local meta = minetest.get_meta(pos)
-		pr(meta:get_string("owner"))
 		if(meta:get_string("owner") ~="" and not( locks:lock_allow_use( pos, player ))) then
 		   return 0;
 		end
@@ -92,7 +90,6 @@ cannons.disabled_formspec =
 	"list[current_player;main;0,5;8,4;]"
 cannons.on_construct = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
-	--pr(minetest.registered_nodes[node.name])
 	if minetest.registered_nodes[node.name].groups.cannonstand then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.formspec)
@@ -108,7 +105,6 @@ cannons.on_construct = function(pos)
 end
 cannons.on_construct_locks = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
-	--pr(minetest.registered_nodes[node.name])
 	if minetest.registered_nodes[node.name].groups.cannonstand then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.formspec..
@@ -156,7 +152,6 @@ function cannons.meseconsfire(pos,node)
 	cannons.fire(pos,node)
 end
 function cannons.nodehitparticles(pos,node)
-pr(type(minetest.registered_nodes[node.name].tiles))
 if type(minetest.registered_nodes[node.name]) == "table" and type(minetest.registered_nodes[node.name].tiles) == "table" and type(minetest.registered_nodes[node.name].tiles[1])== "string" then
 local texture = minetest.registered_nodes[node.name].tiles[1]
 	minetest.add_particlespawner(
@@ -246,7 +241,6 @@ function cannons.register_muni(node,entity)
 	cannons.registered_muni[node].entity = entity
 	cannons.registered_muni[node].entity.on_step = function(self, dtime)
 		self.timer=self.timer+dtime
-		--pr(self.timer,"Timer")
 		if self.timer >= 0.3 then --easiesst less laggiest way to find out that it left his start position
 			local pos = self.object:getpos()
 			local node = minetest.env:get_node(pos)
