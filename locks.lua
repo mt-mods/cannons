@@ -11,7 +11,7 @@ minetest.register_node("cannons:shared_locked_cannon", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = cannons.sound_defaults(),
 	node_box = cannons.nodebox,
 	on_place = cannons.on_place,
 	selection_box = cannons.nodebox,

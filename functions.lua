@@ -15,6 +15,18 @@ function cannons.destroy(pos,range)
 	end
 end
 
+function cannons.sound_defaults(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name="cannons_walk", gain=1.0}
+	table.dig = table.dig or
+			{name="cannons_dig", gain=0.5}
+	table.dug = table.dug or
+			{name="default_dug_node", gain=0.5}
+	table.place = table.place or
+			{name="default_place_node_hard", gain=1.0}
+	return table
+end
 function cannons.inventory_modified(pos)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
