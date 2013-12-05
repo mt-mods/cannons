@@ -12,9 +12,8 @@ minetest.register_node("cannons:shared_locked_cannon", {
 	paramtype2 = "facedir",
 	groups = {cracky=1},
 	sounds = cannons.sound_defaults(),
-	node_box = cannons.nodebox,
+	node_box = cannons.nodeboxes.cannon,
 	on_place = cannons.on_place,
-	selection_box = cannons.nodebox,
 	on_punch = cannons.punched,
 	on_receive_fields = function(pos, formname, fields, sender)
 			locks:lock_handle_input( pos, formname, fields, sender );

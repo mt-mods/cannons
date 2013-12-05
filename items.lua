@@ -161,7 +161,7 @@ end
 
 -- classic cannon --
 minetest.register_node("cannons:cannon", {
-		description = "Cannon",
+	description = "Cannon",
 	stack_max = 1,
 	tiles = {"cannon_cannon_top.png","cannon_cannon_top.png","cannon_cannon_side.png","cannon_cannon_side.png","cannon_cannon_top.png^cannons_rim.png","cannon_cannon_side.png"},
 	drawtype = "nodebox",
@@ -169,35 +169,15 @@ minetest.register_node("cannons:cannon", {
 	paramtype2 = "facedir",
 	groups = {cracky=1},
 	sounds = cannons.sound_defaults(),
-	node_box = cannons.nodebox,
-	on_place = cannons.on_place,
-	selection_box = cannons.nodebox,
+	node_box = cannons.nodeboxes.cannon,
 	on_punch = cannons.punched,
-	mesecons = {effector = {
-		rules = cannons.rules,
-		action_on = cannons.meseconsfire,
-		}
-	},
+	mesecons = cannons.supportMesecons,
 	on_construct = cannons.on_construct,
-	can_dig = function(pos,player)
-		local meta = minetest.get_meta(pos);
-		local inv = meta:get_inventory()
-		if not inv:is_empty("gunpowder") then
-			return false
-		elseif not inv:is_empty("muni") then
-			return false
-		else
-			return true
-		end
-	end,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
-	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
-	
-	on_metadata_inventory_put = cannons.inventory_modified,
-	
-	on_metadata_inventory_take = cannons.inventory_modified,
-	
+	can_dig = cannons.can_dig,
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
+	on_metadata_inventory_put = cannons.inventory_modified,	
+	on_metadata_inventory_take = cannons.inventory_modified,	
 	on_metadata_inventory_move = cannons.inventory_modified,
 	
 })
@@ -212,34 +192,15 @@ minetest.register_node("cannons:bronze_canon", {
 	paramtype2 = "facedir",
 	groups = {cracky=1},
 	sounds = cannons.sound_defaults(),
-	node_box = cannons.nodebox,
-	selection_box = cannons.nodebox,
+	node_box = cannons.nodeboxes.cannon,
 	on_punch = cannons.punched,
-	mesecons = {effector = {
-		rules = cannons.rules,
-		action_on = cannons.meseconsfire,
-		}
-	},
+	mesecons = cannons.supportMesecons,
 	on_construct = cannons.on_construct,
-	can_dig = function(pos,player)
-		local meta = minetest.get_meta(pos);
-		local inv = meta:get_inventory()
-		if not inv:is_empty("gunpowder") then
-			return false
-		elseif not inv:is_empty("muni") then
-			return false
-		else
-			return true
-		end
-	end,
+	can_dig = cannons.can_dig,
 	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
-
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
-	
-	on_metadata_inventory_put = cannons.inventory_modified,
-	
-	on_metadata_inventory_take = cannons.inventory_modified,
-	
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
+	on_metadata_inventory_put = cannons.inventory_modified,	
+	on_metadata_inventory_take = cannons.inventory_modified,	
 	on_metadata_inventory_move = cannons.inventory_modified,
 	
 })
@@ -253,7 +214,7 @@ minetest.register_node("cannons:stand", {
 	paramtype2 = "facedir",
 	groups = {cracky=2,cannonstand=1},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = cannons.stand_nodebox,
+	node_box = cannons.nodeboxes.stand,
 	selection_box = {
 	type = "fixed",
 	fixed = {
@@ -271,7 +232,7 @@ minetest.register_node("cannons:stand_wood", {
 	paramtype2 = "facedir",
 	groups = {cracky=2,cannonstand=1},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = cannons.stand_nodebox,
+	node_box = cannons.nodeboxes.stand,
 	selection_box = {
 	type = "fixed",
 	fixed = {
@@ -283,6 +244,7 @@ minetest.register_node("cannons:stand_wood", {
 --+ cannon balls                     +
 --++++++++++++++++++++++++++++++++++++
 
+--wood ball
 minetest.register_node("cannons:ball_wood", {
 	description = "Cannon Ball Wood",
 	stack_max = 99,
@@ -292,23 +254,10 @@ minetest.register_node("cannons:ball_wood", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-		},
-	},
+	node_box = cannons.nodeboxes.ball,
 })
 
+--stone ball
 minetest.register_node("cannons:ball_stone", {
 	description = "Cannon Ball Stone",
 	stack_max = 99,
@@ -318,23 +267,10 @@ minetest.register_node("cannons:ball_stone", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-		},
-	},
+	node_box = cannons.nodeboxes.ball,
 })
 
+--steel ball
 minetest.register_node("cannons:ball_steel", {
 	description = "Cannon Ball Steel",
 	stack_max = 99,
@@ -344,22 +280,10 @@ minetest.register_node("cannons:ball_steel", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-		},
-	},
+	node_box = cannons.nodeboxes.ball,
 })
+
+--explosion cannon ball
 if cannons.enable_explosion then
 minetest.register_node("cannons:ball_exploding", {
 	description = "Exploding Cannon Ball",
@@ -370,23 +294,11 @@ minetest.register_node("cannons:ball_exploding", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-		},
-	},
+	node_box = cannons.nodeboxes.ball,
 })
 end
+
+--fire cannon ball
 if cannons.enable_fire then
 minetest.register_node("cannons:ball_fire", {
 	description = "Burning Cannon Ball",
@@ -397,23 +309,11 @@ minetest.register_node("cannons:ball_fire", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
-		},
-	},
+	node_box = cannons.nodeboxes.ball,
 })
 end	
+
+--ball wood stack
 minetest.register_node("cannons:ball_wood_stack", {
 	description = "Cannon Ball Wood Stack",
 	stack_max = 99,
@@ -424,24 +324,7 @@ minetest.register_node("cannons:ball_wood_stack", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.1, -0.2, 0.2, 0.3, 0.2}, -- ball top
-			{0.1, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
-			{0.5, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
-			{-0.2, -0.5, 0.5, 0.0, -0.1, 0.2},-- ball back
-			{0.0, -0.5, 0.1, -0.4, -0.1, 0.2},--ball back
-			{-0.2, -0.5, 0.5, -0.4, -0.1, 0.2},-- ball back
-			{-0.2, -0.5, 0.1, -0.4, -0.1, 0.2},-- ball back
-			{-0.2, -0.5, -0.1, -0.4, -0.1, -0.5},
-			{0.0, -0.5, -0.1, -0.4, -0.1, -0.5},
-			
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
+	node_box = cannons.nodeboxes.ball_stack,
 	selection_box = {
 		type = "fixed",
 		fixed = {
@@ -450,7 +333,7 @@ minetest.register_node("cannons:ball_wood_stack", {
 	},
 })
 	
-
+--ball stone stack
 minetest.register_node("cannons:ball_stone_stack", {
 	description = "Cannon Ball Stone Stack",
 	stack_max = 99,
@@ -461,24 +344,7 @@ minetest.register_node("cannons:ball_stone_stack", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.1, -0.2, 0.2, 0.3, 0.2}, -- ball top
-			{0.1, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
-			{0.5, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
-			{-0.2, -0.5, 0.5, 0.0, -0.1, 0.2},-- ball back
-			{0.0, -0.5, 0.1, -0.4, -0.1, 0.2},--ball back
-			{-0.2, -0.5, 0.5, -0.4, -0.1, 0.2},-- ball back
-			{-0.2, -0.5, 0.1, -0.4, -0.1, 0.2},-- ball back
-			{-0.2, -0.5, -0.1, -0.4, -0.1, -0.5},
-			{0.0, -0.5, -0.1, -0.4, -0.1, -0.5},
-			
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
+	node_box = cannons.nodeboxes.ball_stack,
 	selection_box = {
 		type = "fixed",
 		fixed = {
@@ -487,6 +353,7 @@ minetest.register_node("cannons:ball_stone_stack", {
 	},
 })
 
+--ball steel stack
 minetest.register_node("cannons:canon_ball_steel_stack", {
 	description = "Cannon Ball Steel Stack",
 	stack_max = 99,
@@ -497,24 +364,7 @@ minetest.register_node("cannons:canon_ball_steel_stack", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.1, -0.2, 0.2, 0.3, 0.2}, -- ball top
-			{0.1, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
-			{0.5, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
-			{-0.2, -0.5, 0.5, 0.0, -0.1, 0.2},-- ball back
-			{0.0, -0.5, 0.1, -0.4, -0.1, 0.2},--ball back
-			{-0.2, -0.5, 0.5, -0.4, -0.1, 0.2},-- ball back
-			{-0.2, -0.5, 0.1, -0.4, -0.1, 0.2},-- ball back
-			{-0.2, -0.5, -0.1, -0.4, -0.1, -0.5},
-			{0.0, -0.5, -0.1, -0.4, -0.1, -0.5},
-			
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	},
+	node_box = cannons.nodeboxes.ball_stack,
 	selection_box = {
 		type = "fixed",
 		fixed = {

@@ -73,6 +73,7 @@ cannons.allow_metadata_inventory_put = function(pos, listname, index, stack, pla
 		end
 
 	end
+	
 cannons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 
 		local meta = minetest.get_meta(pos)
@@ -91,15 +92,30 @@ cannons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_
 			return 0
 		end
 	end
+	
+cannons.can_dig = function(pos,player)
+		local meta = minetest.get_meta(pos);
+		local inv = meta:get_inventory()
+		if not inv:is_empty("gunpowder") then
+			return false
+		elseif not inv:is_empty("muni") then
+			return false
+		else
+			return true
+		end
+	end
+	
 cannons.formspec =
 	"size[8,9]"..
 	"list[current_name;muni;0,1;1,1;] label[0,0.5;Muni:]"..
 	"list[current_name;gunpowder;0,3;1,1;] label[0,2.5;Gunpowder:]"..
 	"list[current_player;main;0,5;8,4;]"
+	
 cannons.disabled_formspec =
 	"size[8,9]"..
 	"label[2,0.5;Cannon is Disabled. Place it on a cannonstand to activate it]"..
 	"list[current_player;main;0,5;8,4;]"
+	
 cannons.on_construct = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
 	if minetest.registered_nodes[node.name].groups.cannonstand then
@@ -115,6 +131,7 @@ cannons.on_construct = function(pos)
 		meta:set_string("infotext", "Cannon is out of order")
 	end
 end
+
 cannons.on_construct_locks = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
 	if minetest.registered_nodes[node.name].groups.cannonstand then
@@ -132,37 +149,7 @@ cannons.on_construct_locks = function(pos)
 		meta:set_string("infotext", "Cannon is out of order")
 	end
 end
-cannons.nodebox = {
-		type = "fixed",
-		fixed = {
-			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
-			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1}, -- plinth --
-			
-			-- side , top hight , depth , side , bottom, side,
-				
-		}
-	}
-cannons.stand_nodebox = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}, -- bottom --
-			{-0.5, -0.5, -0.5, -0.35, 1.0, 0.5}, -- side left --
-			{0.35, -0.5, -0.5, 0.5, 1.0, 0.5}, -- side right --
-			{0.35, -0.5, -0.2, 0.5, 1.2, 0.5}, -- side right --
-			{-0.5, -0.5, -0.2, -0.35, 1.2, 0.5}, -- side left --
-			
-			-- side , top , side , side , bottom, side,
-				
-		},
-	}
-	cannons.rules =
-		{{x = 1, y = 0, z = 0},
- {x =-1, y = 0, z = 0},
- {x = 0, y = 0, z = 1},
- {x = 0, y = 0, z =-1}}
-function cannons.meseconsfire(pos,node)
-	cannons.fire(pos,node)
-end
+
 function cannons.nodehitparticles(pos,node)
 if type(minetest.registered_nodes[node.name]) == "table" and type(minetest.registered_nodes[node.name].tiles) == "table" and type(minetest.registered_nodes[node.name].tiles[1])== "string" then
 local texture = minetest.registered_nodes[node.name].tiles[1]
@@ -291,6 +278,82 @@ end
 function cannons.get_settings(node)
 	return cannons.registered_muni[node].entity		
 end
+--++++++++++++++++++++++++++++++++++++
+--+ mesecons stuff                   +
+--++++++++++++++++++++++++++++++++++++
+cannons.rules ={
+	{x = 1, y = 0, z = 0},
+	{x =-1, y = 0, z = 0},
+	{x = 0, y = 0, z = 1},
+	{x = 0, y = 0, z =-1}
+ }
+ 
+function cannons.meseconsfire(pos,node)
+	cannons.fire(pos,node)
+end
+
+cannons.supportMesecons = {
+	effector = {
+		rules = cannons.rules,
+		action_on = cannons.meseconsfire,
+		}
+}
+	
+
+--++++++++++++++++++++++++++++++++++++
+--+ cannons.nodeboxes                +
+--++++++++++++++++++++++++++++++++++++
+cannons.nodeboxes = {}
+cannons.nodeboxes.ball = {
+		type = "fixed",
+		fixed = {
+			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
+			
+			-- side , top , side , side , bottom, side,
+				
+		},
+	}
+cannons.nodeboxes.ball_stack = {
+		type = "fixed",
+		fixed = {
+			{-0.2, -0.1, -0.2, 0.2, 0.3, 0.2}, -- ball top
+			{0.1, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
+			{0.5, -0.5, -0.2, 0.2, -0.1, 0.2}, -- ball left
+			{-0.2, -0.5, 0.5, 0.0, -0.1, 0.2},-- ball back
+			{0.0, -0.5, 0.1, -0.4, -0.1, 0.2},--ball back
+			{-0.2, -0.5, 0.5, -0.4, -0.1, 0.2},-- ball back
+			{-0.2, -0.5, 0.1, -0.4, -0.1, 0.2},-- ball back
+			{-0.2, -0.5, -0.1, -0.4, -0.1, -0.5},
+			{0.0, -0.5, -0.1, -0.4, -0.1, -0.5},
+			
+			
+			-- side , top , side , side , bottom, side,
+				
+		},
+	}
+cannons.nodeboxes.cannon = {
+		type = "fixed",
+		fixed = {
+			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
+			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1}, -- plinth --
+			
+			-- side , top hight , depth , side , bottom, side,
+				
+		}
+	}
+cannons.nodeboxes.stand = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}, -- bottom --
+			{-0.5, -0.5, -0.5, -0.35, 1.0, 0.5}, -- side left --
+			{0.35, -0.5, -0.5, 0.5, 1.0, 0.5}, -- side right --
+			{0.35, -0.5, -0.2, 0.5, 1.2, 0.5}, -- side right --
+			{-0.5, -0.5, -0.2, -0.35, 1.2, 0.5}, -- side left --
+			
+			-- side , top , side , side , bottom, side,
+				
+		},
+	}
 
 local apple={
 	physical = false,
