@@ -5,7 +5,7 @@ minetest.register_node("cannons:mithril_cannon", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=1},
+	groups = {cracky=1,cannon=1},
 	sounds = cannons.sound_defaults(),
 	node_box = cannons.nodeboxes.cannon,
 	on_punch = cannons.punched,

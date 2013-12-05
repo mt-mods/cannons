@@ -59,6 +59,6 @@ minetest.register_node("cannons:shared_locked_cannon", {
 minetest.register_craft({
    output = 'cannons:shared_locked_cannon',
    recipe = {
-      {'cannons:cannon', 'locks:lock',},
+      {'group:cannon', 'locks:lock',},
    },
 })
