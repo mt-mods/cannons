@@ -15,6 +15,9 @@ if minetest.get_modpath("locks") ~=nil then
 minetest.log("locks mod enabled. execute locks.lua")
 	dofile(cannons.MODPATH .."/locks.lua")--if the locks mod is installed execute this file
 end
-
-minetest.log("action", "[MOD]"..minetest.get_current_modname().." -- loaded from "..minetest.get_modpath(minetest.get_current_modname()))
+if minetest.get_modpath("moreores") ~=nil then
+minetest.log("info","moreores mod enabled. execute moreores.lua")
+	dofile(cannons.MODPATH .."/moreores.lua")--if the moreores mod is installed execute this file
+end
+minetest.log("info", "[MOD]"..minetest.get_current_modname().." -- loaded from "..minetest.get_modpath(minetest.get_current_modname()))
 
