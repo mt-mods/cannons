@@ -184,7 +184,7 @@ minetest.register_node("cannons:cannon", {
 
 -- bronze cannon --
 minetest.register_node("cannons:bronze_canon", {
-		description = "Cannon (bronze)",
+	description = "Cannon (bronze)",
 	stack_max = 1,
 	tiles = {"cannon_bronze_cannon_top.png","cannon_bronze_cannon_top.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_side.png","cannon_bronze_cannon_top.png^cannons_rim.png","cannon_bronze_cannon_side.png"},
 	drawtype = "nodebox",
@@ -266,7 +266,7 @@ minetest.register_node("cannons:ball_stone", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = default.node_sound_stone_defaults(),
 	node_box = cannons.nodeboxes.ball,
 })
 
@@ -279,7 +279,7 @@ minetest.register_node("cannons:ball_steel", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = cannons.sound_defaults(),
 	node_box = cannons.nodeboxes.ball,
 })
 
@@ -343,7 +343,7 @@ minetest.register_node("cannons:ball_stone_stack", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = default.node_sound_stone_defaults(),
 	node_box = cannons.nodeboxes.ball_stack,
 	selection_box = {
 		type = "fixed",
@@ -354,7 +354,7 @@ minetest.register_node("cannons:ball_stone_stack", {
 })
 
 --ball steel stack
-minetest.register_node("cannons:canon_ball_steel_stack", {
+minetest.register_node("cannons:ball_steel_stack", {
 	description = "Cannon Ball Steel Stack",
 	stack_max = 99,
 	tiles = {"cannon_cannon_top.png"},
@@ -363,7 +363,7 @@ minetest.register_node("cannons:canon_ball_steel_stack", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = cannons.sound_defaults(),
 	node_box = cannons.nodeboxes.ball_stack,
 	selection_box = {
 		type = "fixed",

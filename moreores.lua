@@ -36,8 +36,8 @@ minetest.register_craft({
 --mithrill ball
 minetest.register_node("cannons:ball_mithril", {
 	description = "Cannon Ball mithril",
-	stack_max = 99,
-	tiles = {"cannons_miithril_cannon_top.png"},
+	stack_max = 9,
+	tiles = {"cannon_mithril_cannon_top.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -55,8 +55,8 @@ minetest.register_craft({
 --ball mithril stack
 minetest.register_node("cannons:ball_mithril_stack", {
 	description = "Cannon Ball mithril Stack",
-	stack_max = 99,
-	tiles = {"cannon_cannon_top.png"},
+	stack_max = 9,
+	tiles = {"cannon_mithril_cannon_top.png"},
 	drawtype = "nodebox",
 	drop = 'cannons:ball_mithril 4',
 	paramtype = "light",
