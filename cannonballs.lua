@@ -81,8 +81,7 @@ end
 --+ Wooden Cannon ball                +
 --++++++++++++++++++++++++++++++++++++
 
-
-local ball_wood={
+cannons.register_muni("cannons:ball_wood",{
 	physical = false,
 	timer=0,
 	textures = {"cannons_wood_bullet.png"},
@@ -126,15 +125,13 @@ local ball_wood={
 		end
 	end,
 
-}
-cannons.register_muni("cannons:ball_wood",ball_wood)
+})
 
 --++++++++++++++++++++++++++++++++++++
 --+ Stone Cannon ball                +
 --++++++++++++++++++++++++++++++++++++
 
-
-local ball_stone={
+cannons.register_muni("cannons:ball_stone",{
 	physical = false,
 	timer=0,
 	textures = {"cannons_bullet.png"},
@@ -178,15 +175,13 @@ local ball_stone={
 		end
 	end,
 
-}
-cannons.register_muni("cannons:ball_stone",ball_stone)
+})
 
 --++++++++++++++++++++++++++++++++++++
 --+ Steel Cannon ball                +
 --++++++++++++++++++++++++++++++++++++
 
-
-local ball_steel={
+cannons.register_muni("cannons:ball_steel",{
 	physical = false,
 	timer=0,
 	textures = {"cannons_bullet_iron.png"},
@@ -230,5 +225,4 @@ local ball_steel={
 		end
 	end,
 
-}
-cannons.register_muni("cannons:ball_steel",ball_steel)
+})
