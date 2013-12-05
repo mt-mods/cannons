@@ -372,6 +372,6 @@ minetest.register_node("cannons:ball_steel_stack", {
 		},
 	},
 })
-
+minetest.register_alias("cannons:canon_ball_steel_stack", "cannons:ball_steel_stack")
 
 
