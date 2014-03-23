@@ -130,11 +130,14 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'cannons:ball_steel',
+	output = 'cannons:ball_steel 2',
 	recipe = {
-		{"default:steelblock"}
+		{"", "default:steel_ingot",""},
+		{"default:steel_ingot","default:steel_ingot","default:steel_ingot"},
+		{"", "default:steel_ingot",""},
 	},
 })
+
 if cannons.enable_explosion then
 minetest.register_craft({
 	output = 'cannons:ball_exploding 2',
@@ -145,6 +148,7 @@ minetest.register_craft({
 	},
 })
 end
+
 if cannons.enable_fire then
 minetest.register_craft({
 	output = 'cannons:ball_fire 2',
