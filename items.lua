@@ -138,7 +138,7 @@ minetest.register_craft({
 	},
 })
 
-if cannons.enable_explosion then
+if cannons.config:get("enable_explosion") == "true" then
 minetest.register_craft({
 	output = 'cannons:ball_exploding 2',
 	recipe = {
@@ -149,7 +149,7 @@ minetest.register_craft({
 })
 end
 
-if cannons.enable_fire then
+if cannons.config:get("enable_fire") == "true" then
 minetest.register_craft({
 	output = 'cannons:ball_fire 2',
 	recipe = {
@@ -288,7 +288,7 @@ minetest.register_node("cannons:ball_steel", {
 })
 
 --explosion cannon ball
-if cannons.enable_explosion then
+if cannons.config:get("enable_explosion") == "true" then
 minetest.register_node("cannons:ball_exploding", {
 	description = "Exploding Cannon Ball",
 	stack_max = 99,
@@ -303,7 +303,7 @@ minetest.register_node("cannons:ball_exploding", {
 end
 
 --fire cannon ball
-if cannons.enable_fire then
+if cannons.config:get("enable_fire") == "true" then
 minetest.register_node("cannons:ball_fire", {
 	description = "Burning Cannon Ball",
 	stack_max = 99,

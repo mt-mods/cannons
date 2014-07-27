@@ -37,7 +37,7 @@ local exploding={
 	end,
 
 }
-if cannons.enable_explosion then
+if cannons.config:get("enable_explosion") == "true" then
 	cannons.register_muni("cannons:ball_exploding",exploding)
 end
 local fire={
@@ -73,7 +73,7 @@ local fire={
 	end,
 
 }
-if cannons.enable_fire then
+if cannons.config:get("enable_fire")=="true" then
 	cannons.register_muni("cannons:ball_fire",fire)
 end
 

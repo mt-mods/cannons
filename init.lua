@@ -3,9 +3,23 @@
 
 cannons = {}
 cannons.MODPATH = minetest.get_modpath(minetest.get_current_modname())
+local worldpath = minetest.get_worldpath()
+cannons.config = Settings(worldpath.."/cannons.conf")
 
+local conf_table = cannons.config:to_table()
 
-dofile(cannons.MODPATH .."/settings.txt")
+--look into readme.txt how to change settings
+local defaults = {
+enable_explosion = "true",
+enable_fire = "true",
+}
+
+for k, v in pairs(defaults) do
+if conf_table[k] == nil then
+cannons.config:set(k, v)
+end
+end
+
 dofile(cannons.MODPATH .."/print_r.lua")
 dofile(cannons.MODPATH .."/functions.lua")
 dofile(cannons.MODPATH .."/items.lua")

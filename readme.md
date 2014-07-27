@@ -1,4 +1,4 @@
-# Welcome to the cannons mod
+# Welcome to the cannons mod #
 cannons is a mod for the game minetest written by Kingarthurs Team
 (Semmett9, eythen, and addi)
 
@@ -7,11 +7,27 @@ you can shot the cannon if you punch it with a torch.
 
 the cannonball will damage the other players.
 if it wears armor the damage will be calculated.
-## configure cannons
 
-if you dont want exploding or burning muni you can dissable it in the settings.txt
+## configure cannons ##
+create a file caled cannons.conf in your world dir.
+
+add the folowing lines to it:
+
+```
+#!conf
 
 
+enable_explosion = "true"
+enable_fire = "true"
+```
+
+
+now you can change it. eg. if you want to disable fire then cange
+*enable_fire = "true"*
+to 
+*enable_fire = "false"*
+
+thats all :-)
 
 ## Dependencies
 
