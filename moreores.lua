@@ -1,27 +1,76 @@
-minetest.register_node("cannons:mithril_cannon", {
-	description = "Cannon (mithril)",
+--mithril cannon
+minetest.register_node("cannons:cannon_mithril", {
+	description = "mithril cannon",
 	stack_max = 1,
-	tiles = {"cannon_mithril_cannon_top.png","cannon_mithril_cannon_top.png","cannon_mithril_cannon_side.png","cannon_mithril_cannon_side.png","cannon_mithril_cannon_top.png^cannons_rim.png","cannon_mithril_cannon_side.png"},
-	drawtype = "nodebox",
+	tiles = {"cannons_mithril_top.png","cannons_mithril_side.png"},
+	drawtype = "mesh",
+	selection_box = cannons.nodeboxes.cannon,
+	collision_box = cannons.nodeboxes.cannon,
+	mesh = "cannon.obj",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1,cannon=1},
 	sounds = cannons.sound_defaults(),
-	node_box = cannons.nodeboxes.cannon,
 	on_punch = cannons.punched,
 	mesecons = cannons.supportMesecons,
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
+	on_metadata_inventory_put = cannons.inventory_modified,	
+	on_metadata_inventory_take = cannons.inventory_modified,	
+	on_metadata_inventory_move = cannons.inventory_modified,	
+})
 
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
-	
-	on_metadata_inventory_put = cannons.inventory_modified,
-	
-	on_metadata_inventory_take = cannons.inventory_modified,
-	
-	on_metadata_inventory_move = cannons.inventory_modified,
-	
+--wood stand with mithril cannon
+minetest.register_node("cannons:wood_stand_with_cannon_mithril", {
+	description = "wooden stand with mithril cannon",
+	cannons ={stand="cannons:wood_stand",cannon="cannons:cannon_mithril"},
+	stack_max = 0,
+	tiles = {"cannons_mithril_top.png","cannons_mithril_side.png","default_wood.png","default_wood.png^cannons_rim.png"},
+	mesh = "cannonstand_cannon.obj",
+	selection_box = cannons.nodeboxes.cannon,
+	collision_box = cannons.nodeboxes.cannon,
+	drawtype = "mesh",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=2,cannonstand=1},
+	sounds = cannons.sound_defaults(),
+	on_punch = cannons.punched,
+	mesecons = cannons.supportMesecons,
+	on_construct = cannons.on_construct,
+	can_dig = cannons.can_dig,
+	on_dig = cannons.dug,
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
+	on_metadata_inventory_put = cannons.inventory_modified,	
+	on_metadata_inventory_take = cannons.inventory_modified,	
+	on_metadata_inventory_move = cannons.inventory_modified,		
+})	
+--ship_stand with mithril cannon
+minetest.register_node("cannons:ship_stand_with_cannon_mithril", {
+	description = "ship stand with mithril cannon",
+	cannons ={stand="cannons:ship_stand",cannon="cannons:cannon_mithril"},
+	stack_max = 0,
+	tiles = {"cannons_mithril_top.png","cannons_mithril_side.png","cannons_steel_top.png","default_wood.png","default_wood.png^cannons_rim.png"},
+	mesh = "ship_cannonstand_cannon.obj",
+	selection_box = cannons.nodeboxes.cannon,
+	collision_box = cannons.nodeboxes.cannon,
+	drawtype = "mesh",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	groups = {cracky=2,cannonstand=1},
+	sounds = cannons.sound_defaults(),
+	on_punch = cannons.punched,
+	mesecons = cannons.supportMesecons,
+	on_construct = cannons.on_construct,
+	can_dig = cannons.can_dig,
+	on_dig = cannons.dug,
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
+	on_metadata_inventory_put = cannons.inventory_modified,	
+	on_metadata_inventory_take = cannons.inventory_modified,	
+	on_metadata_inventory_move = cannons.inventory_modified,	
 })
 --craft reziep mithrill cannon
 minetest.register_craft({
@@ -37,7 +86,7 @@ minetest.register_craft({
 minetest.register_node("cannons:ball_mithril", {
 	description = "Cannon Ball mithril",
 	stack_max = 9,
-	tiles = {"cannon_mithril_cannon_top.png"},
+	tiles = {"cannons_mithril_top.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
@@ -56,7 +105,7 @@ minetest.register_craft({
 minetest.register_node("cannons:ball_mithril_stack", {
 	description = "Cannon Ball mithril Stack",
 	stack_max = 9,
-	tiles = {"cannon_mithril_cannon_top.png"},
+	tiles = {"cannons_mithril_top.png"},
 	drawtype = "nodebox",
 	drop = 'cannons:ball_mithril 4',
 	paramtype = "light",

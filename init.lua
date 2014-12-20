@@ -1,4 +1,4 @@
-
+minetest.log("warning","This is an unstable beta version!")
 
 
 cannons = {}
@@ -26,8 +26,8 @@ dofile(cannons.MODPATH .."/items.lua")
 dofile(cannons.MODPATH .."/cannonballs.lua")
 
 if minetest.get_modpath("locks") ~=nil then
-minetest.log("locks mod enabled. execute locks.lua")
-	dofile(cannons.MODPATH .."/locks.lua")--if the locks mod is installed execute this file
+minetest.log("warning","locks mod enabled. dont execute locks.lua because this is an unstable beta version!")
+	--dofile(cannons.MODPATH .."/locks.lua")--if the locks mod is installed execute this file
 end
 if minetest.get_modpath("moreores") ~=nil then
 minetest.log("info","moreores mod enabled. execute moreores.lua")

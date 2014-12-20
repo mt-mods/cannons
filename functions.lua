@@ -113,7 +113,7 @@ cannons.formspec =
 	
 cannons.disabled_formspec =
 	"size[8,9]"..
-	"label[2,0.5;Cannon is Disabled. Place it on a cannonstand to activate it]"..
+	"label[1,0.5;Cannon is Disabled. Place it on a cannonstand to activate it]"..
 	"list[current_player;main;0,5;8,4;]"
 	
 cannons.on_construct = function(pos)
@@ -129,6 +129,36 @@ cannons.on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.disabled_formspec)
 		meta:set_string("infotext", "Cannon is out of order")
+	end
+end
+
+cannons.stand_on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+	if minetest.registered_nodes[itemstack:get_name()].groups.cannon then --if rightclicked with a cannon
+		local item = string.split(itemstack:get_name(),":")[2];
+		node.name=node.name.."_with_"..item
+		---print(node.name);
+		minetest.swap_node(pos, node)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec", cannons.formspec)
+		meta:set_string("infotext", "Cannon has no muni and no gunpowder")
+		local inv = meta:get_inventory()
+		inv:set_size("gunpowder", 1)
+		inv:set_size("muni", 1)
+		return itemstack
+	end
+end
+
+cannons.dug = function(pos, node, digger)
+	local cannons = minetest.registered_nodes[node.name].cannons
+	if cannons and cannons.stand and cannons.cannon then --node dug
+		node.name = cannons.stand
+		minetest.swap_node(pos, node)--replace node with the stand
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec","")
+		meta:set_string("infotext", "place a cannon on this stand")
+		local inv =  digger:get_inventory()
+		local stack = inv:add_item("main", ItemStack(cannons.cannon))--add the cannon to the ineentory
+		minetest.item_drop(stack, digger, pos)
 	end
 end
 
@@ -176,6 +206,7 @@ function cannons.fire(pos,node,puncher)
 	local inv = meta:get_inventory()
 	local stack = inv:get_stack("muni", 1)
 	local muni = stack:to_table()
+	local dir = {}
 	if inv:contains_item("gunpowder","cannons:gunpowder 1") 
 		and muni ~= nil 
 		and cannons.is_muni(muni.name) 
@@ -185,8 +216,7 @@ function cannons.fire(pos,node,puncher)
 		if puncher ~= nil then
 			dir=puncher:get_look_dir()
 			meta:set_string("dir", minetest.serialize(dir))
-		else
-			dir = {}
+		else			
 			dir = minetest.deserialize(meta:get_string("dir"));
 			if dir == nil then
 				return
@@ -344,11 +374,11 @@ cannons.nodeboxes.cannon = {
 cannons.nodeboxes.stand = {
 		type = "fixed",
 		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5}, -- bottom --
-			{-0.5, -0.5, -0.5, -0.35, 1.0, 0.5}, -- side left --
-			{0.35, -0.5, -0.5, 0.5, 1.0, 0.5}, -- side right --
-			{0.35, -0.5, -0.2, 0.5, 1.2, 0.5}, -- side right --
-			{-0.5, -0.5, -0.2, -0.35, 1.2, 0.5}, -- side left --
+			{-0.5, -0.5, -0.5, 0.5, -0.45, 0.5}, -- bottom --
+			{-0.5, -0.5, -0.5, -0.35, 0.0, 0.5}, -- side left --
+			{0.35, -0.5, -0.5, 0.5, 0.0, 0.5}, -- side right --
+			{0.35, -0.5, -0.2, 0.5, 0.2, 0.5}, -- side right --
+			{-0.5, -0.5, -0.2, -0.35, 0.2, 0.5}, -- side left --
 			
 			-- side , top , side , side , bottom, side,
 				
