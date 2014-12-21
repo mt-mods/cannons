@@ -12,6 +12,7 @@ local conf_table = cannons.config:to_table()
 local defaults = {
 enable_explosion = "true",
 enable_fire = "true",
+convert_old_nodes = "true",
 }
 
 for k, v in pairs(defaults) do
@@ -20,10 +21,15 @@ cannons.config:set(k, v)
 end
 end
 
+
 dofile(cannons.MODPATH .."/print_r.lua")
 dofile(cannons.MODPATH .."/functions.lua")
 dofile(cannons.MODPATH .."/items.lua")
 dofile(cannons.MODPATH .."/cannonballs.lua")
+
+if cannons.config:get("convert_old_nodes")=="true" then
+	dofile(cannons.MODPATH .."/convert.lua")
+end
 
 if minetest.get_modpath("locks") ~=nil then
 minetest.log("warning","locks mod enabled. dont execute locks.lua because this is an unstable beta version!")
