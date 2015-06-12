@@ -144,6 +144,7 @@ cannons.stand_on_rightclick = function(pos, node, player, itemstack, pointed_thi
 		local inv = meta:get_inventory()
 		inv:set_size("gunpowder", 1)
 		inv:set_size("muni", 1)
+		itemstack:take_item(1)
 		return itemstack
 	end
 end
