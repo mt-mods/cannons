@@ -34,8 +34,8 @@ minetest.register_abm({
 				node.name = "cannons:bronze_cannon"
 			elseif node.name == "cannons:cannon_mithril" then
 				node.name = "cannons:cannon_mithril"
-			--else if node.name == "cannons:bronze_canon" then
-			--	node.name = "cannons:wood_stand_with_bronze_cannon"
+			--else if node.name == "cannons:placeholder" then
+			--	node.name = "cannons:wood_stand_with_placeholder_cannon"
 			else --dont know what else can happen, but "Der Teufel ist ein Eichhörnchen"
 				node.name = "air"
 			end
@@ -43,8 +43,28 @@ minetest.register_abm({
 		end
 	end,
 })
-
---abm to clean single cannonstands
---minetest.register_alias("name", "convert_to")
-minetest.register_alias("cannons:stand", "default:cobble")
-minetest.register_alias("cannons:stand_wood", "default:wood")
+--abm to convert single cannonstands
+minetest.register_abm({
+	nodenames = {"cannons:stand","cannons:stand_wood"},
+	interval = 1.0,
+	chance = 1,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		local above_pos = {x= pos.x,y= pos.y+1,z=pos.z}
+		local above = minetest.get_node(above_pos)
+		--if above the  stand a cannon...
+		if above.name == "cannons:cannon" or above.name == "cannons:bronze_canon" or above.name == "cannons:mithril_cannon" then 
+			--do nothing, let the first abm do all
+		elseif above.name == "air" then
+			minetest.set_node(above_pos, {name = "cannons:wood_stand"})
+		else
+			--replace single stands with a full block, and place the stand above it
+			if node.name == "cannons:stand" then
+				minetest.set_node(pos, {name = "default:cobble"})--replace stand with cobblestone
+				
+			else
+				minetest.set_node(pos, {name = "default:wood"})--replace stand with cobblestone
+			end
+		end
+		
+	end,
+})
