@@ -30,8 +30,8 @@ end
 function cannons.inventory_modified(pos)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
-	local stack = inv:get_stack("muni", 1)
-	local muni = stack:to_table()
+	local muni = inv:get_stack("muni", 1):to_table()
+	local gunpowder = inv:get_stack("gunpowder", 1):to_table();
 	local addition = ""
 	if  meta:get_string("owner") ~="" then
 		addition = " (owned by "..meta:get_string("owner")..")"
@@ -41,8 +41,12 @@ function cannons.inventory_modified(pos)
 	else
 		muni = cannons.is_muni(muni.name)
 	end
+	if gunpowder == nil then
+		gunpowder = false;
+	else
+		gunpowder = cannons.is_gunpowder(gunpowder.name)
+	end
 	
-	local gunpowder = inv:contains_item("gunpowder","cannons:gunpowder 1")
 	if not muni and not gunpowder then
 		meta:set_string("infotext","Cannon has no muni and no gunpowder"..addition)
 	
@@ -65,7 +69,7 @@ cannons.allow_metadata_inventory_put = function(pos, listname, index, stack, pla
 		end
 		local inv = meta:get_inventory()
 		stack = stack:to_table()
-		if listname == "gunpowder" and stack.name == "cannons:gunpowder" then	
+		if listname == "gunpowder" and cannons.is_gunpowder(stack.name) then	
 			return stack.count
 		elseif listname == "muni" and cannons.is_muni(stack.name) then	
 			return stack.count
@@ -83,7 +87,7 @@ cannons.allow_metadata_inventory_move = function(pos, from_list, from_index, to_
 		local inv = meta:get_inventory()
 		local stack = inv:get_stack(from_list, from_index)
 		stack = stack:to_table()
-		if to_list == "gunpowder" and stack.name == "cannons:gunpowder" then
+		if to_list == "gunpowder" and cannons.is_gunpowder(stack.name) then
 			return count
 		
 		elseif to_list == "muni" and  cannons.is_muni(stack.name) then
@@ -205,13 +209,16 @@ end
 function cannons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
-	local stack = inv:get_stack("muni", 1)
-	local muni = stack:to_table()
+	local muni = inv:get_stack("muni", 1):to_table();
+	local gunpowder = inv:get_stack("gunpowder", 1):to_table();
 	local dir = {}
-	if inv:contains_item("gunpowder","cannons:gunpowder 1") 
-		and muni ~= nil 
+	--print(muni ~= nil,cannons.is_muni(muni.name),inv:contains_item("muni",muni.name.." 1"),gunpowder ~= nil ,cannons.is_gunpowder(gunpowder.name),inv:contains_item("gunpowder",gunpowder.name.." 1"))
+	if  muni ~= nil 
 		and cannons.is_muni(muni.name) 
-		and inv:contains_item("muni",muni.name.." 1") 
+		and inv:contains_item("muni",muni.name.." 1")
+		and gunpowder ~= nil
+		and cannons.is_gunpowder(gunpowder.name)
+		and inv:contains_item("gunpowder",gunpowder.name.." 1")
 	
 	then 
 		if puncher ~= nil then
@@ -228,7 +235,7 @@ function cannons.fire(pos,node,puncher)
 		
 
 		inv:remove_item("muni", muni.name.." 1")
-		inv:remove_item("gunpowder", "cannons:gunpowder 1")
+		inv:remove_item("gunpowder", gunpowder.name.." 1")
 		cannons.inventory_modified(pos)
 
 
@@ -261,7 +268,7 @@ function cannons.punched(pos, node, puncher)
 end
 
 --++++++++++++++++++++++++++++++++++++
---+ cannons.register_muni             +
+--+ cannons.register_muni            +
 --++++++++++++++++++++++++++++++++++++
 
 cannons.registered_muni = {}
@@ -290,7 +297,7 @@ function cannons.register_muni(node,entity)
 						self.on_player_hit(self,pos,player)
 					end		
 				end
-			elseif node.name ~=air  then
+			elseif node.name ~= "air"  then
 				self.on_node_hit(self,pos,node)
 			end	
 			self.lastpos={x=pos.x, y=pos.y, z=pos.z}
@@ -301,14 +308,96 @@ function cannons.register_muni(node,entity)
 end
 
 function cannons.is_muni(node)
-	return cannons.registered_muni[node] ~= nil		
+	return cannons.registered_muni[node] ~= nil
 end
 function cannons.get_entity(node)
-	return cannons.registered_muni[node].obj		
+	return cannons.registered_muni[node].obj
 end
 function cannons.get_settings(node)
-	return cannons.registered_muni[node].entity		
+	return cannons.registered_muni[node].entity	
 end
+
+--++++++++++++++++++++++++++++++++++++
+--+ cannons.register_gunpowder       +
+--++++++++++++++++++++++++++++++++++++
+cannons.registered_gunpowder = {}
+function cannons.register_gunpowder(node)
+	cannons.registered_gunpowder[node] = true;
+end
+
+function cannons.is_gunpowder(node)
+	return cannons.registered_gunpowder[node] ~= nil
+end
+
+
+--++++++++++++++++++++++++++++++++++++
+--+ cannons ball stack               +
+--++++++++++++++++++++++++++++++++++++
+function cannons.on_ball_punch(pos, node, puncher, pointed_thing)
+	if not puncher or not puncher:is_player() then
+	  return
+	end
+	local nodearr = string.split(node.name,"_stack_");
+	local item = nodearr[1];
+	local level = tonumber(nodearr[2]);
+	puncher:get_inventory():add_item('main', item)
+	if level > 1 then
+		node.name = item.."_stack_"..level-1
+		minetest.swap_node(pos,node);
+	else 
+		minetest.remove_node(pos);
+	end
+end
+
+function cannons.on_ball_rightclick(pos, node, player, itemstack, pointed_thing)
+	if not player or not player:is_player() then
+	  return
+	end
+	local basename = string.split(itemstack:get_name(),"_stack_")[1];
+	local nodearr = string.split(node.name,"_stack_");
+	local item = nodearr[1];
+	local level = tonumber(nodearr[2]);
+	if basename == item then
+		if level < 5 then
+			itemstack:take_item(1)
+			node.name = item.."_stack_"..level+1
+			minetest.swap_node(pos,node);
+			return itemstack;
+		else 
+			return itemstack
+		end
+	end
+	
+end
+
+function cannons.generate_and_register_ball_node(name,nodedef)
+	minetest.register_alias(name, name.."_stack_1");
+	nodedef.drawtype = "nodebox";
+	nodedef.selection_box = nil;
+	nodedef.on_punch = cannons.on_ball_punch;
+	nodedef.on_rightclick = cannons.on_ball_rightclick;
+	local nodebox = {
+		type = "fixed",
+		fixed = {},
+		}; --initialize empty nodebox
+		
+	for number = 1, 5, 1 do 
+		nodebox.fixed[number] = cannons.nodeboxes.ball_stack.fixed[number];--copy a part to nodebox
+		nodedef.node_box = nodebox;--add nodebox to nodedef
+		nodedef.selection_box = table.copy(nodebox);
+		nodedef["drop"] =  name.."_stack_1 "..number;--set drop
+		nodedef.name = name.."_stack_"..number;--set name
+		
+		minetest.register_node(nodedef.name, table.copy(nodedef))--register node
+	end
+	--register craft, to allow craft 5-stacks
+	minetest.register_craft({ 
+		type = "shapeless", 
+		output = name.."_stack_5", 
+		recipe = { name,name,name,name,name},
+	})
+end
+
 --++++++++++++++++++++++++++++++++++++
 --+ mesecons stuff                   +
 --++++++++++++++++++++++++++++++++++++

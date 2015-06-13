@@ -38,7 +38,7 @@ local exploding={
 
 }
 if cannons.config:get("enable_explosion") == "true" then
-	cannons.register_muni("cannons:ball_exploding",exploding)
+	cannons.register_muni("cannons:ball_exploding_stack_1",exploding)
 end
 local fire={
 	physical = false,
@@ -74,14 +74,14 @@ local fire={
 
 }
 if cannons.config:get("enable_fire")=="true" then
-	cannons.register_muni("cannons:ball_fire",fire)
+	cannons.register_muni("cannons:ball_fire_stack_1",fire)
 end
 
 --++++++++++++++++++++++++++++++++++++
 --+ Wooden Cannon ball                +
 --++++++++++++++++++++++++++++++++++++
 
-cannons.register_muni("cannons:ball_wood",{
+cannons.register_muni("cannons:ball_wood_stack_1",{
 	physical = false,
 	timer=0,
 	textures = {"cannons_wood_bullet.png"},
@@ -131,7 +131,7 @@ cannons.register_muni("cannons:ball_wood",{
 --+ Stone Cannon ball                +
 --++++++++++++++++++++++++++++++++++++
 
-cannons.register_muni("cannons:ball_stone",{
+cannons.register_muni("cannons:ball_stone_stack_1",{
 	physical = false,
 	timer=0,
 	textures = {"cannons_bullet.png"},
@@ -181,7 +181,7 @@ cannons.register_muni("cannons:ball_stone",{
 --+ Steel Cannon ball                +
 --++++++++++++++++++++++++++++++++++++
 
-cannons.register_muni("cannons:ball_steel",{
+cannons.register_muni("cannons:ball_steel_stack_1",{
 	physical = false,
 	timer=0,
 	textures = {"cannons_bullet_iron.png"},

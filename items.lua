@@ -7,6 +7,7 @@ minetest.register_craftitem("cannons:gunpowder", {
 	description = "Gunpowder",
 	inventory_image = "cannons_gunpowder.png"
 })
+cannons.register_gunpowder("cannons:gunpowder");
 
 minetest.register_craftitem("cannons:salt", {
 	description = "Salt",
@@ -89,29 +90,7 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
-	type = "shapeless",
-	output = 'cannons:ball_steel_stack',
-	recipe = {
-		"cannons:ball_steel", "cannons:ball_steel", "cannons:ball_steel", "cannons:ball_steel"
-	},
-})
 
-minetest.register_craft({
-	type = "shapeless",
-	output = 'cannons:ball_stone_stack',
-	recipe = {
-		"cannons:ball_stone", "cannons:ball_stone", "cannons:ball_stone", "cannons:ball_stone"
-	},
-})
-
-minetest.register_craft({
-	type = "shapeless",
-	output = 'cannons:ball_wood_stack',
-	recipe = {
-		"cannons:ball_wood", "cannons:ball_wood", "cannons:ball_wood", "cannons:ball_wood"
-	},
-})
 
 minetest.register_craft({
 	output = 'cannons:ball_wood 5',
@@ -354,7 +333,7 @@ minetest.register_node("cannons:wood_stand_with_cannon_bronze", {
 --++++++++++++++++++++++++++++++++++++
 
 --wood ball
-minetest.register_node("cannons:ball_wood", {
+cannons.generate_and_register_ball_node("cannons:ball_wood", {
 	description = "Cannon Ball Wood",
 	stack_max = 99,
 	tiles = {"default_wood.png"},
@@ -367,7 +346,7 @@ minetest.register_node("cannons:ball_wood", {
 })
 
 --stone ball
-minetest.register_node("cannons:ball_stone", {
+cannons.generate_and_register_ball_node("cannons:ball_stone", {
 	description = "Cannon Ball Stone",
 	stack_max = 99,
 	tiles = {"default_stone.png"},
@@ -380,7 +359,7 @@ minetest.register_node("cannons:ball_stone", {
 })
 
 --steel ball
-minetest.register_node("cannons:ball_steel", {
+cannons.generate_and_register_ball_node("cannons:ball_steel", {
 	description = "Cannon Ball Steel",
 	stack_max = 99,
 	tiles = {"cannons_steel_top.png"},
@@ -388,13 +367,13 @@ minetest.register_node("cannons:ball_steel", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2},
+	--diggable = false,
 	sounds = cannons.sound_defaults(),
-	node_box = cannons.nodeboxes.ball,
 })
 
 --explosion cannon ball
 if cannons.config:get("enable_explosion") == "true" then
-minetest.register_node("cannons:ball_exploding", {
+cannons.generate_and_register_ball_node("cannons:ball_exploding", {
 	description = "Exploding Cannon Ball",
 	stack_max = 99,
 	tiles = {"default_mese_block.png"},
@@ -403,13 +382,12 @@ minetest.register_node("cannons:ball_exploding", {
 	paramtype2 = "facedir",
 	groups = {cracky=2},
 	sounds = default.node_sound_wood_defaults(),
-	node_box = cannons.nodeboxes.ball,
 })
 end
 
 --fire cannon ball
 if cannons.config:get("enable_fire") == "true" then
-minetest.register_node("cannons:ball_fire", {
+cannons.generate_and_register_ball_node("cannons:ball_fire", {
 	description = "Burning Cannon Ball",
 	stack_max = 99,
 	tiles = {"default_tree.png"},
@@ -421,66 +399,4 @@ minetest.register_node("cannons:ball_fire", {
 	node_box = cannons.nodeboxes.ball,
 })
 end	
-
---ball wood stack
-minetest.register_node("cannons:ball_wood_stack", {
-	description = "Cannon Ball Wood Stack",
-	stack_max = 99,
-	tiles = {"default_wood.png"},
-	drawtype = "nodebox",
-	drop = 'cannons:ball_wood 4',
-	paramtype = "light",
-	paramtype2 = "facedir",
-	groups = {cracky=2},
-	sounds = default.node_sound_wood_defaults(),
-	node_box = cannons.nodeboxes.ball_stack,
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.5, 0.5, 0.3, 0.5},
-		},
-	},
-})
-	
---ball stone stack
-minetest.register_node("cannons:ball_stone_stack", {
-	description = "Cannon Ball Stone Stack",
-	stack_max = 99,
-	tiles = {"default_stone.png"},
-	drawtype = "nodebox",
-	drop = 'cannons:ball_stone 4',
-	paramtype = "light",
-	paramtype2 = "facedir",
-	groups = {cracky=2},
-	sounds = default.node_sound_stone_defaults(),
-	node_box = cannons.nodeboxes.ball_stack,
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.5, 0.5, 0.3, 0.5},
-		},
-	},
-})
-
---ball steel stack
-minetest.register_node("cannons:ball_steel_stack", {
-	description = "Cannon Ball Steel Stack",
-	stack_max = 99,
-	tiles = {"cannons_steel_top.png"},
-	drawtype = "nodebox",
-	drop = 'cannons:ball_steel 4',
-	paramtype = "light",
-	paramtype2 = "facedir",
-	groups = {cracky=2},
-	sounds = cannons.sound_defaults(),
-	node_box = cannons.nodeboxes.ball_stack,
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.5, 0.5, 0.3, 0.5},
-		},
-	},
-})
-minetest.register_alias("cannons:canon_ball_steel_stack", "cannons:ball_steel_stack")
-
 
