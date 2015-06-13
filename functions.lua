@@ -114,11 +114,34 @@ cannons.formspec =
 	"list[current_name;muni;0,1;1,1;] label[0,0.5;Muni:]"..
 	"list[current_name;gunpowder;0,3;1,1;] label[0,2.5;Gunpowder:]"..
 	"list[current_player;main;0,5;8,4;]"
-	
+if default and default.gui_bg then 
+	cannons.formspec = cannons.formspec..default.gui_bg;
+end
+
+if default and default.gui_bg_img then 
+	cannons.formspec = cannons.formspec..default.gui_bg_img;
+end
+
+if default and default.gui_slots then 
+	cannons.formspec = cannons.formspec..default.gui_slots;
+end
+
 cannons.disabled_formspec =
 	"size[8,9]"..
 	"label[1,0.5;Cannon is Disabled. Place it on a cannonstand to activate it]"..
 	"list[current_player;main;0,5;8,4;]"
+	
+if default and default.gui_bg then 
+	cannons.disabled_formspec = cannons.disabled_formspec..default.gui_bg;
+end
+
+if default and default.gui_bg_img then 
+	cannons.disabled_formspec = cannons.disabled_formspec..default.gui_bg_img;
+end
+
+if default and default.gui_slots then 
+	cannons.disabled_formspec = cannons.disabled_formspec..default.gui_slots;
+end
 	
 cannons.on_construct = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
