@@ -57,12 +57,11 @@ Salt (shapeless):
 
 Gunpowder (schapeless):
 
-![gunpowder](http://thatraspberrypiserver.raspberryip.com/Infinatum_Minetest/Downloads/cannon/img/craft_gunpowder.gif)
+![craft gunpowder](https://bitbucket.org/repo/bxGA9B/images/474788878-craft_gunpowder.gif)
 
 cannons:
 
-![cannon & bronce cannon](http://thatraspberrypiserver.raspberryip.com/Infinatum_Minetest/Downloads/cannon/img/craft_cannon.gif)
-
+![cannon & bronce cannon](https://bitbucket.org/repo/bxGA9B/images/237489485-craft_cannon.gif)
 Wooden stand:
 
 ![wooden stand](https://bitbucket.org/kingarthursteam/cannons/wiki/crafts/woden_stand.png)
