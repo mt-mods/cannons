@@ -145,7 +145,7 @@ end
 	
 cannons.on_construct = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
-	if minetest.registered_nodes[node.name].groups.cannonstand then
+	if minetest.get_item_group(itemstack:get_name(), "cannonstand")>=1 then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.formspec)
 		meta:set_string("infotext", "Cannon has no muni and no gunpowder")
@@ -160,7 +160,7 @@ cannons.on_construct = function(pos)
 end
 
 cannons.stand_on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	if minetest.registered_nodes[itemstack:get_name()].groups.cannon then --if rightclicked with a cannon
+	if  minetest.get_item_group(itemstack:get_name(), "cannon")>=1 then --if rightclicked with a cannon
 		local item = string.split(itemstack:get_name(),":")[2];
 		node.name=node.name.."_with_"..item
 		---print(node.name);
