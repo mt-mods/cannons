@@ -145,7 +145,7 @@ end
 	
 cannons.on_construct = function(pos)
 	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
-	if minetest.get_item_group(itemstack:get_name(), "cannonstand")>=1 then
+	if minetest.get_item_group(node.name, "cannonstand")>=1 then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.formspec)
 		meta:set_string("infotext", "Cannon has no muni and no gunpowder")
