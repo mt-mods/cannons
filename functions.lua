@@ -144,8 +144,8 @@ if default and default.gui_slots then
 end
 	
 cannons.on_construct = function(pos)
-	local node = minetest.get_node({x = pos.x ,y = pos.y-1, z = pos.z})
-	if minetest.get_item_group(node.name, "cannonstand")>=1 then
+	local node = minetest.get_node({x = pos.x ,y = pos.y, z = pos.z})
+		if minetest.registered_items[node.name].cannons then
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", cannons.formspec)
 		meta:set_string("infotext", "Cannon has no muni and no gunpowder")
