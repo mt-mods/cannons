@@ -177,6 +177,12 @@ cannons.stand_on_rightclick = function(pos, node, player, itemstack, pointed_thi
 end
 
 cannons.dug = function(pos, node, digger)
+	if not node or not type(node)=="table" then
+	  return
+	end
+	if not digger or not digger:is_player() then
+	  return
+	end
 	local cannons = minetest.registered_nodes[node.name].cannons
 	if cannons and cannons.stand and cannons.cannon then --node dug
 		node.name = cannons.stand
