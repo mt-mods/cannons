@@ -5,10 +5,8 @@
 		"cannon",
         "cannons",
 		"medieval",
-		"shoot"
-		
+		"shoot"	
     ],
-	/*"homepage": "http://example.com/",*/
     "forum": "http://forum.minetest.net/viewtopic.php?f=11&t=7744",
     "screenshots": [
         "https://bitbucket.org/kingarthursteam/cannons/raw/master/screenshot.png",
