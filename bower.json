@@ -1,0 +1,29 @@
+{
+    "name": "cannons",
+    "description": "The Cannons mod adds Cannons to the game.\nto shot insert muni and gunpowder and punch that with a torch.\nthe muni can destroy nodes and h...",
+    "keywords": [
+		"cannon",
+        "cannons",
+		"medieval",
+		"shoot"
+		
+    ],
+	/*"homepage": "http://example.com/",*/
+    "forum": "http://forum.minetest.net/viewtopic.php?f=11&t=7744",
+    "screenshots": [
+        "https://bitbucket.org/kingarthursteam/cannons/raw/master/screenshot.png",
+		"https://bitbucket.org/kingarthursteam/cannons/wiki/screenshots/screenshot_1531516.png",
+		"https://bitbucket.org/kingarthursteam/cannons/wiki/screenshots/screenshot_1849086.png",
+		"https://bitbucket.org/kingarthursteam/cannons/wiki/screenshots/screenshot_5781410.png"
+    ],
+    "authors": [
+        "kingarthursteam",
+		"addi",
+		"Semmett9",
+		"eythen"
+    ],
+	"ignore": [
+		"indev"
+  ]
+    "license": "CC BY-SA"
+}
