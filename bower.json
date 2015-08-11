@@ -1,6 +1,6 @@
 {
     "name": "cannons",
-    "description": "The Cannons mod adds Cannons to the game.\nto shot insert muni and gunpowder and punch that with a torch.\nthe muni can destroy nodes and h...",
+    "description": "To shoot insert muni and gunpowder and punch the cannon with a torch.",
     "keywords": [
 		"cannon",
         "cannons",
@@ -22,6 +22,6 @@
     ],
 	"ignore": [
 		"indev"
-  ]
+	],
     "license": "CC BY-SA"
 }
