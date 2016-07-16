@@ -55,7 +55,7 @@ minetest.register_craft({
 -- new crafts --
 
 minetest.register_craft({
-	output = 'cannons:cannon',
+	output = "cannons:cannon_steel",
 	recipe = {
 		{"default:steelblock", "default:steelblock", "default:steelblock"},
 		{"cannons:gunpowder", "default:mese_block", ""},
@@ -64,7 +64,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = 'cannons:bronze_canon',
+	output = "cannons:cannon_bronze",
 	recipe = {
 		{"default:bronzeblock", "default:bronzeblock", "default:bronzeblock"},
 		{"cannons:gunpowder", "default:mese_block", ""},
@@ -117,7 +117,7 @@ minetest.register_craft({
 	},
 })
 
-if cannons.config:get("enable_explosion") == "true" then
+if cannons.config:get_bool("enable_explosion") then
 minetest.register_craft({
 	output = 'cannons:ball_exploding 2',
 	recipe = {
@@ -128,7 +128,7 @@ minetest.register_craft({
 })
 end
 
-if cannons.config:get("enable_fire") == "true" then
+if cannons.config:get_bool("enable_fire") then
 minetest.register_craft({
 	output = 'cannons:ball_fire 2',
 	recipe = {
@@ -372,7 +372,7 @@ cannons.generate_and_register_ball_node("cannons:ball_steel", {
 })
 
 --explosion cannon ball
-if cannons.config:get("enable_explosion") == "true" then
+if cannons.config:get_bool("enable_explosion") then
 cannons.generate_and_register_ball_node("cannons:ball_exploding", {
 	description = "Exploding Cannon Ball",
 	stack_max = 99,
@@ -386,7 +386,7 @@ cannons.generate_and_register_ball_node("cannons:ball_exploding", {
 end
 
 --fire cannon ball
-if cannons.config:get("enable_fire") == "true" then
+if cannons.config:get_bool("enable_fire")  then
 cannons.generate_and_register_ball_node("cannons:ball_fire", {
 	description = "Burning Cannon Ball",
 	stack_max = 99,

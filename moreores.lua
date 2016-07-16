@@ -74,7 +74,7 @@ minetest.register_node("cannons:ship_stand_with_cannon_mithril", {
 })
 --craft reziep mithrill cannon
 minetest.register_craft({
-	output = 'cannons:mithril_cannon',
+	output = "cannons:cannon_mithril",
 	recipe = {
 		{"moreores:mithril_block", "moreores:mithril_block", "moreores:mithril_block"},
 		{"cannons:gunpowder", "default:mese_block", ""},
@@ -83,7 +83,7 @@ minetest.register_craft({
 })
 
 --mithrill ball
-minetest.register_node("cannons:ball_mithril", {
+cannons.generate_and_register_ball_node("cannons:ball_mithril", {
 	description = "Cannon Ball mithril",
 	stack_max = 9,
 	tiles = {"cannons_mithril_top.png"},
@@ -94,6 +94,7 @@ minetest.register_node("cannons:ball_mithril", {
 	sounds = cannons.sound_defaults(),
 	node_box = cannons.nodeboxes.ball,
 })
+
 minetest.register_craft({
 	output = 'cannons:ball_mithril',
 	recipe = {
@@ -101,35 +102,9 @@ minetest.register_craft({
 	},
 })
 
---ball mithril stack
-minetest.register_node("cannons:ball_mithril_stack", {
-	description = "Cannon Ball mithril Stack",
-	stack_max = 9,
-	tiles = {"cannons_mithril_top.png"},
-	drawtype = "nodebox",
-	drop = 'cannons:ball_mithril 4',
-	paramtype = "light",
-	paramtype2 = "facedir",
-	groups = {cracky=2},
-	sounds = cannons.sound_defaults(),
-	node_box = cannons.nodeboxes.ball_stack,
-	selection_box = {
-		type = "fixed",
-		fixed = {
-			{-0.4, -0.5, -0.5, 0.5, 0.3, 0.5},
-		},
-	},
-})
-minetest.register_craft({
-	type = "shapeless",
-	output = 'cannons:ball_mithril_stack',
-	recipe = {
-		"cannons:ball_mithril", "cannons:ball_mithril", "cannons:ball_mithril", "cannons:ball_mithril"
-	},
-})
 
 --mithril ball
-cannons.register_muni("cannons:ball_mithril",{
+cannons.register_muni("cannons:ball_mithril_stack_1",{
 	physical = false,
 	timer=0,
 	textures = {"cannons_ball_mithril.png"},
