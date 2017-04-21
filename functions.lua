@@ -368,7 +368,7 @@ function cannons.on_ball_punch(pos, node, puncher, pointed_thing)
 	end
 	local nodearr = string.split(node.name,"_stack_");
 	local item = nodearr[1];
-	local level = tonumber(nodearr[2]);
+	local level = tonumber(nodearr[2]) or 0;
 	puncher:get_inventory():add_item('main', item)
 	if level > 1 then
 		node.name = item.."_stack_"..level-1
