@@ -5,6 +5,11 @@ function cannons.destroy(pos,range)
 	for z=-range,range do
 		if x*x+y*y+z*z <= range * range + range then
 			local np={x=pos.x+x,y=pos.y+y,z=pos.z+z}
+
+			if minetest.is_protected(np, "") then
+				return -- fail fast
+			end
+
 			local n = minetest.env:get_node(np)
 			if n.name ~= "air" then
 				minetest.env:remove_node(np)
