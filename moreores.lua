@@ -15,11 +15,11 @@ minetest.register_node("cannons:cannon_mithril", {
 	mesecons = cannons.supportMesecons,
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
 })
 
 --wood stand with mithril cannon
@@ -41,12 +41,12 @@ minetest.register_node("cannons:wood_stand_with_cannon_mithril", {
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
 	on_dig = cannons.dug,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,		
-})	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
+})
 --ship_stand with mithril cannon
 minetest.register_node("cannons:ship_stand_with_cannon_mithril", {
 	description = "ship stand with mithril cannon",
@@ -66,11 +66,11 @@ minetest.register_node("cannons:ship_stand_with_cannon_mithril", {
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
 	on_dig = cannons.dug,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
 })
 --craft reziep mithrill cannon
 minetest.register_craft({
@@ -132,7 +132,7 @@ cannons.register_muni("cannons:ball_mithril_stack_1",{
 	end,
 	on_node_hit = function(self,pos,node)
 	cannons.nodehitparticles(pos,node)
-		if node.name == "default:dirt_with_grass" then			
+		if node.name == "default:dirt_with_grass" then
 			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
 			minetest.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})

@@ -161,11 +161,11 @@ minetest.register_node("cannons:cannon_steel", {
 	mesecons = cannons.supportMesecons,
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
 })
 
 --bronze cannon
@@ -187,11 +187,11 @@ minetest.register_node("cannons:cannon_bronze", {
 	mesecons = cannons.supportMesecons,
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
 })
 
 minetest.register_node("cannons:wood_stand", {
@@ -245,12 +245,12 @@ minetest.register_node("cannons:wood_stand_with_cannon_steel", {
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
 	on_dig = cannons.dug,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
-})	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
+})
 
 minetest.register_node("cannons:ship_stand_with_cannon_steel", {
 	description = "ship stand with steel cannon",
@@ -270,12 +270,12 @@ minetest.register_node("cannons:ship_stand_with_cannon_steel", {
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
 	on_dig = cannons.dug,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
-})	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
+})
 
 minetest.register_node("cannons:ship_stand_with_cannon_bronze", {
 	description = "ship stand with bronze cannon",
@@ -295,12 +295,12 @@ minetest.register_node("cannons:ship_stand_with_cannon_bronze", {
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
 	on_dig = cannons.dug,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
-})	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
+})
 --wooden stand with bronze cannon --
 --in German: Holzständer mit Bronzekanone
 minetest.register_node("cannons:wood_stand_with_cannon_bronze", {
@@ -321,12 +321,12 @@ minetest.register_node("cannons:wood_stand_with_cannon_bronze", {
 	on_construct = cannons.on_construct,
 	can_dig = cannons.can_dig,
 	on_dig = cannons.dug,
-	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,	
-	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
-	on_metadata_inventory_move = cannons.inventory_modified,	
-})	
+	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
+	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
+	on_metadata_inventory_move = cannons.inventory_modified,
+})
 
 --++++++++++++++++++++++++++++++++++++
 --+ cannon balls                     +
@@ -398,5 +398,4 @@ cannons.generate_and_register_ball_node("cannons:ball_fire", {
 	sounds = default.node_sound_wood_defaults(),
 	node_box = cannons.nodeboxes.ball,
 })
-end	
-
+end

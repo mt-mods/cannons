@@ -14,7 +14,6 @@ local exploding={
 	velocity=30,
 	collisionbox = {-0.25,-0.25,-0.25, 0.25,0.25,0.25},
 	on_player_hit = function(self,pos,player)
-		local playername = player:get_player_name()
 		player:punch(self.object, 1.0, {
 			full_punch_interval=1.0,
 			damage_groups={fleshy=self.damage},
@@ -53,7 +52,6 @@ local fire={
 	velocity=35,
 	collisionbox = {-0.25,-0.25,-0.25, 0.25,0.25,0.25},
 	on_player_hit = function(self,pos,player)
-		local playername = player:get_player_name()
 		player:punch(self.object, 1.0, {
 			full_punch_interval=1.0,
 			damage_groups={fleshy=self.damage},
@@ -109,7 +107,7 @@ cannons.register_muni("cannons:ball_wood_stack_1",{
 	end,
 	on_node_hit = function(self,pos,node)
 		cannons.nodehitparticles(pos,node)
-		if node.name == "default:dirt_with_grass" then			
+		if node.name == "default:dirt_with_grass" then
 			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
 			minetest.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
@@ -159,7 +157,7 @@ cannons.register_muni("cannons:ball_stone_stack_1",{
 	end,
 	on_node_hit = function(self,pos,node)
 	cannons.nodehitparticles(pos,node)
-		if node.name == "default:dirt_with_grass" then			
+		if node.name == "default:dirt_with_grass" then
 			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
 			minetest.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
@@ -209,7 +207,7 @@ cannons.register_muni("cannons:ball_steel_stack_1",{
 	end,
 	on_node_hit = function(self,pos,node)
 		cannons.nodehitparticles(pos,node)
-		if node.name == "default:dirt_with_grass" then			
+		if node.name == "default:dirt_with_grass" then
 			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
 			minetest.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
