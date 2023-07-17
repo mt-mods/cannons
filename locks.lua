@@ -22,7 +22,7 @@ minetest.register_node("cannons:shared_locked_cannon", {
 			locks:lock_set_owner( pos, placer, "empty locked shareable cannon" );
 	end,
 	--no mesecons support for this type of cannon!
-	--mesecons = {effector = { 
+	--mesecons = {effector = {
 	--	rules = cannons.rules,
 	--	action_on = cannons.meseconsfire,
 	--	}
@@ -40,7 +40,7 @@ minetest.register_node("cannons:shared_locked_cannon", {
 		end
 	end,
 	allow_metadata_inventory_put = cannons.allow_metadata_inventory_put,
-	
+
 	allow_metadata_inventory_move = cannons.allow_metadata_inventory_move,
 	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
 		if( not( locks:lock_allow_use( pos, player ))) then
@@ -48,11 +48,11 @@ minetest.register_node("cannons:shared_locked_cannon", {
 		end
 		return stack:get_count()
 	end,
-	
-	on_metadata_inventory_put = cannons.inventory_modified,	
-	on_metadata_inventory_take = cannons.inventory_modified,	
+
+	on_metadata_inventory_put = cannons.inventory_modified,
+	on_metadata_inventory_take = cannons.inventory_modified,
 	on_metadata_inventory_move = cannons.inventory_modified,
-	
+
 })
 
 
