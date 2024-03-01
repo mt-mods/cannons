@@ -155,6 +155,7 @@ minetest.register_node("cannons:cannon_steel", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1,cannon=1},
+	is_ground_content = false,
 	sounds = cannons.sound_defaults(),
 	--node_box = cannons.nodeboxes.cannon,
 	on_punch = cannons.punched,
@@ -181,6 +182,7 @@ minetest.register_node("cannons:cannon_bronze", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1,cannon=1},
+	is_ground_content = false,
 	sounds = cannons.sound_defaults(),
 	--node_box = cannons.nodeboxes.cannon,
 	on_punch = cannons.punched,
@@ -206,6 +208,7 @@ minetest.register_node("cannons:wood_stand", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {choppy=2,cannonstand=1},
+	is_ground_content = false,
 	sounds = default.node_sound_wood_defaults(),
 	on_rightclick = cannons.stand_on_rightclick
 })
@@ -222,6 +225,7 @@ minetest.register_node("cannons:ship_stand", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {choppy=2,cannonstand=1},
+	is_ground_content = false,
 	sounds = default.node_sound_wood_defaults(),
 	on_rightclick = cannons.stand_on_rightclick
 })
@@ -239,6 +243,7 @@ minetest.register_node("cannons:wood_stand_with_cannon_steel", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2,cannonstand=1},
+	is_ground_content = false,
 	sounds = cannons.sound_defaults(),
 	on_punch = cannons.punched,
 	mesecons = cannons.supportMesecons,
@@ -264,6 +269,7 @@ minetest.register_node("cannons:ship_stand_with_cannon_steel", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2,cannonstand=1},
+	is_ground_content = false,
 	sounds = cannons.sound_defaults(),
 	on_punch = cannons.punched,
 	mesecons = cannons.supportMesecons,
@@ -289,6 +295,7 @@ minetest.register_node("cannons:ship_stand_with_cannon_bronze", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2,cannonstand=1},
+	is_ground_content = false,
 	sounds = cannons.sound_defaults(),
 	on_punch = cannons.punched,
 	mesecons = cannons.supportMesecons,
@@ -315,6 +322,7 @@ minetest.register_node("cannons:wood_stand_with_cannon_bronze", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=2,cannonstand=1},
+	is_ground_content = false,
 	sounds = cannons.sound_defaults(),
 	on_punch = cannons.punched,
 	mesecons = cannons.supportMesecons,
