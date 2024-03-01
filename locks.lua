@@ -4,13 +4,14 @@
 
 
 minetest.register_node("cannons:shared_locked_cannon", {
-		description = "locked shareable Cannon",
+	description = "locked shareable Cannon",
 	stack_max = 1,
 	tiles = {"cannon_cannon_top.png","cannon_cannon_top.png","cannon_cannon_side.png","cannon_cannon_side.png","cannon_cannon_top.png^cannons_rim.png","cannon_cannon_side.png"},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {cracky=1},
+	is_ground_content = false,
 	sounds = cannons.sound_defaults(),
 	node_box = cannons.nodeboxes.cannon,
 	on_place = cannons.on_place,
