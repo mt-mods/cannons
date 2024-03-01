@@ -216,24 +216,24 @@ end
 
 function cannons.nodehitparticles(pos,node)
 if type(minetest.registered_nodes[node.name]) == "table" and type(minetest.registered_nodes[node.name].tiles) == "table" and type(minetest.registered_nodes[node.name].tiles[1])== "string" then
-local texture = minetest.registered_nodes[node.name].tiles[1]
+	local texture = minetest.registered_nodes[node.name].tiles[1]
 	minetest.add_particlespawner(
-        30, --amount
-        0.5, --time
-        {x=pos.x-0.3, y=pos.y+0.3, z=pos.z-0.3}, --minpos
-        {x=pos.x+0.3, y=pos.y+0.5, z=pos.z+0.3}, --maxpos
-        {x=0, y=2, z=0}, --minvel
-        {x=0, y=3, z=0}, --maxvel
-        {x=-4,y=-4,z=-4}, --minacc
-        {x=4,y=-4,z=4}, --maxacc
-        0.1, --minexptime
-        1, --maxexptime
-        1, --minsize
-        3, --maxsize
-        false, --collisiondetection
-        texture --texture
-    )
-	end
+		30, --amount
+		0.5, --time
+		{x=pos.x-0.3, y=pos.y+0.3, z=pos.z-0.3}, --minpos
+		{x=pos.x+0.3, y=pos.y+0.5, z=pos.z+0.3}, --maxpos
+		{x=0, y=2, z=0}, --minvel
+		{x=0, y=3, z=0}, --maxvel
+		{x=-4,y=-4,z=-4}, --minacc
+		{x=4,y=-4,z=4}, --maxacc
+		0.1, --minexptime
+		1, --maxexptime
+		1, --minsize
+		3, --maxsize
+		false, --collisiondetection
+		texture --texture
+	)
+end
 end
 function cannons.fire(pos,node,puncher)
 	local meta = minetest.get_meta(pos)
@@ -273,12 +273,12 @@ function cannons.fire(pos,node,puncher)
 		obj:setvelocity({x=dir.x*settings.velocity, y=-1, z=dir.z*settings.velocity})
 		obj:setacceleration({x=dir.x*-3, y=-settings.gravity, z=dir.z*-3})
 		minetest.add_particlespawner(50,0.5,
-    pos, pos,
-    {x=dir.x*settings.velocity, y=-1, z=dir.z*settings.velocity}, {x=dir.x*settings.velocity/2, y=-1, z=dir.z*settings.velocity/2},
-    {x=dir.x*-3/4, y=-settings.gravity*2, z=dir.z*-3/4}, {x=dir.x*-3/2, y=-settings.gravity, z=dir.z*-3/2},
-    0.1, 0.5,--time
-    0.5, 1,
-    false, "cannons_gunpowder.png")
+			pos, pos,
+			{x=dir.x*settings.velocity, y=-1, z=dir.z*settings.velocity}, {x=dir.x*settings.velocity/2, y=-1, z=dir.z*settings.velocity/2},
+			{x=dir.x*-3/4, y=-settings.gravity*2, z=dir.z*-3/4}, {x=dir.x*-3/2, y=-settings.gravity, z=dir.z*-3/2},
+			0.1, 0.5,--time
+			0.5, 1,
+			false, "cannons_gunpowder.png")
 	end
 end
 
@@ -404,6 +404,7 @@ function cannons.generate_and_register_ball_node(name,nodedef)
 	nodedef.selection_box = nil;
 	nodedef.on_punch = cannons.on_ball_punch;
 	nodedef.on_rightclick = cannons.on_ball_rightclick;
+	nodedef.is_ground_content = false
 	local nodebox = {
 		type = "fixed",
 		fixed = {},
@@ -444,7 +445,7 @@ cannons.supportMesecons = {
 	effector = {
 		rules = cannons.rules,
 		action_on = cannons.meseconsfire,
-		}
+	}
 }
 
 
@@ -453,49 +454,49 @@ cannons.supportMesecons = {
 --++++++++++++++++++++++++++++++++++++
 cannons.nodeboxes = {}
 cannons.nodeboxes.ball = {
-		type = "fixed",
-		fixed = {
-			{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
+	type = "fixed",
+	fixed = {
+		{-0.2, -0.5, -0.2, 0.2, -0.1, 0.2},
 
-			-- side , top , side , side , bottom, side,
+		-- side , top , side , side , bottom, side,
 
-		},
-	}
+	},
+}
 
 cannons.nodeboxes.ball_stack = {
-		type = "fixed",
-		fixed = {
-			{-0.4375, -0.5, 0.0625, -0.0625, -0.125, 0.4375}, -- unten_hinten_links
-			{0.125, -0.5, 0.125, 0.5, -0.125, 0.5}, -- unten_hinten_rechts
-			{-0.4375, -0.5, -0.375, -0.0625, -0.125, 0}, -- unten_vorne_links
-			{0.0625, -0.5, -0.4375, 0.4375, -0.125, -0.0625}, -- unten_vorne_rechts
-			{-0.1875, -0.125, -0.125, 0.1875, 0.25, 0.25}, -- oben_mitte
-		},
-	}
+	type = "fixed",
+	fixed = {
+		{-0.4375, -0.5, 0.0625, -0.0625, -0.125, 0.4375}, -- unten_hinten_links
+		{0.125, -0.5, 0.125, 0.5, -0.125, 0.5}, -- unten_hinten_rechts
+		{-0.4375, -0.5, -0.375, -0.0625, -0.125, 0}, -- unten_vorne_links
+		{0.0625, -0.5, -0.4375, 0.4375, -0.125, -0.0625}, -- unten_vorne_rechts
+		{-0.1875, -0.125, -0.125, 0.1875, 0.25, 0.25}, -- oben_mitte
+	},
+}
 
 cannons.nodeboxes.cannon = {
-		type = "fixed",
-		fixed = {
-			{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
-			{0.53, -0.1, 0.1, -0.53, 0.1, -0.1}, -- plinth --
+	type = "fixed",
+	fixed = {
+		{-0.2, 0.2, -0.7, 0.2, -0.2, 0.9}, -- barrle --
+		{0.53, -0.1, 0.1, -0.53, 0.1, -0.1}, -- plinth --
 
-			-- side , top hight , depth , side , bottom, side,
+		-- side , top hight , depth , side , bottom, side,
 
-		}
 	}
+}
 cannons.nodeboxes.stand = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, -0.45, 0.5}, -- bottom --
-			{-0.5, -0.5, -0.5, -0.35, 0.0, 0.5}, -- side left --
-			{0.35, -0.5, -0.5, 0.5, 0.0, 0.5}, -- side right --
-			{0.35, -0.5, -0.2, 0.5, 0.2, 0.5}, -- side right --
-			{-0.5, -0.5, -0.2, -0.35, 0.2, 0.5}, -- side left --
+	type = "fixed",
+	fixed = {
+		{-0.5, -0.5, -0.5, 0.5, -0.45, 0.5}, -- bottom --
+		{-0.5, -0.5, -0.5, -0.35, 0.0, 0.5}, -- side left --
+		{0.35, -0.5, -0.5, 0.5, 0.0, 0.5}, -- side right --
+		{0.35, -0.5, -0.2, 0.5, 0.2, 0.5}, -- side right --
+		{-0.5, -0.5, -0.2, -0.35, 0.2, 0.5}, -- side left --
 
-			-- side , top , side , side , bottom, side,
+		-- side , top , side , side , bottom, side,
 
-		},
-	}
+	},
+}
 
 local apple={
 	physical = false,
