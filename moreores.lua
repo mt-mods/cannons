@@ -1,5 +1,5 @@
 --mithril cannon
-minetest.register_node("cannons:cannon_mithril", {
+core.register_node("cannons:cannon_mithril", {
 	description = "mithril cannon",
 	stack_max = 1,
 	tiles = {"cannons_mithril_top.png","cannons_mithril_side.png"},
@@ -24,7 +24,7 @@ minetest.register_node("cannons:cannon_mithril", {
 })
 
 --wood stand with mithril cannon
-minetest.register_node("cannons:wood_stand_with_cannon_mithril", {
+core.register_node("cannons:wood_stand_with_cannon_mithril", {
 	description = "wooden stand with mithril cannon",
 	cannons ={stand="cannons:wood_stand",cannon="cannons:cannon_mithril"},
 	stack_max = 0,
@@ -50,7 +50,7 @@ minetest.register_node("cannons:wood_stand_with_cannon_mithril", {
 	on_metadata_inventory_move = cannons.inventory_modified,
 })
 --ship_stand with mithril cannon
-minetest.register_node("cannons:ship_stand_with_cannon_mithril", {
+core.register_node("cannons:ship_stand_with_cannon_mithril", {
 	description = "ship stand with mithril cannon",
 	cannons ={stand="cannons:ship_stand",cannon="cannons:cannon_mithril"},
 	stack_max = 0,
@@ -76,7 +76,7 @@ minetest.register_node("cannons:ship_stand_with_cannon_mithril", {
 	on_metadata_inventory_move = cannons.inventory_modified,
 })
 --craft reziep mithrill cannon
-minetest.register_craft({
+core.register_craft({
 	output = "cannons:cannon_mithril",
 	recipe = {
 		{"moreores:mithril_block", "moreores:mithril_block", "moreores:mithril_block"},
@@ -98,7 +98,7 @@ cannons.generate_and_register_ball_node("cannons:ball_mithril", {
 	node_box = cannons.nodeboxes.ball,
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = 'cannons:ball_mithril',
 	recipe = {
 		{"moreores:mithril_block"}
@@ -124,7 +124,7 @@ cannons.register_muni("cannons:ball_mithril_stack_1",{
 			damage_groups={fleshy=self.damage},
 			}, nil)
 		self.object:remove()
-		minetest.chat_send_all(playername .." tried to catch a canonball")
+		core.chat_send_all(playername .." tried to catch a canonball")
 	end,
 	on_mob_hit = function(self,pos,mob)
 		mob:punch(self.object, 1.0, {
@@ -136,16 +136,16 @@ cannons.register_muni("cannons:ball_mithril_stack_1",{
 	on_node_hit = function(self,pos,node)
 	cannons.nodehitparticles(pos,node)
 		if node.name == "default:dirt_with_grass" then
-			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
-			minetest.sound_play("cannons_hit",
+			core.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
+			core.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		elseif node.name == "default:water_source" then
-		minetest.sound_play("cannons_splash",
+		core.sound_play("cannons_splash",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		else
-		minetest.sound_play("cannons_hit",
+		core.sound_play("cannons_hit",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		end

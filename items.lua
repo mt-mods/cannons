@@ -2,19 +2,19 @@
 --+ Craft Items                      +
 --++++++++++++++++++++++++++++++++++++
 
-minetest.register_craftitem("cannons:gunpowder", {
+core.register_craftitem("cannons:gunpowder", {
 	groups = {gunpowder=1},
 	description = "Gunpowder",
 	inventory_image = "cannons_gunpowder.png"
 })
 cannons.register_gunpowder("cannons:gunpowder");
 
-minetest.register_craftitem("cannons:salt", {
+core.register_craftitem("cannons:salt", {
 	description = "Salt",
 	inventory_image = "cannons_salt.png"
 })
 
-minetest.register_craftitem("cannons:bucket_salt", {
+core.register_craftitem("cannons:bucket_salt", {
 	description = "Bucket with salt",
 	inventory_image = "cannons_bucket_salt.png",
 	stack_max = 300
@@ -25,7 +25,7 @@ minetest.register_craftitem("cannons:bucket_salt", {
 --+ crafts                           +
 --++++++++++++++++++++++++++++++++++++
 
-minetest.register_craft({
+core.register_craft({
     type = "shapeless",
 	output = 'cannons:salt 12',
 	recipe = {
@@ -36,14 +36,14 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
+core.register_craft({
 	type = "cooking",
 	output = 'cannons:bucket_salt',
 	recipe = 'bucket:bucket_water',
 	cooktime = 15
 })
 
-minetest.register_craft({
+core.register_craft({
 	type = "shapeless",
 	output = 'cannons:gunpowder',
 	recipe = {
@@ -54,7 +54,7 @@ minetest.register_craft({
 
 -- new crafts --
 
-minetest.register_craft({
+core.register_craft({
 	output = "cannons:cannon_steel",
 	recipe = {
 		{"default:steelblock", "default:steelblock", "default:steelblock"},
@@ -63,7 +63,7 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "cannons:cannon_bronze",
 	recipe = {
 		{"default:bronzeblock", "default:bronzeblock", "default:bronzeblock"},
@@ -72,7 +72,7 @@ minetest.register_craft({
 	},
 })
 
---minetest.register_craft({
+--core.register_craft({
 --	output = 'cannons:stand',
 --	recipe = {
 --		{"default:wood", "", "default:wood"},
@@ -81,7 +81,7 @@ minetest.register_craft({
 --	},
 --})
 
-minetest.register_craft({
+core.register_craft({
 	output = 'cannons:wood_stand',
 	recipe = {
 		{"default:wood", "", "default:wood"},
@@ -92,7 +92,7 @@ minetest.register_craft({
 
 
 
-minetest.register_craft({
+core.register_craft({
 	output = 'cannons:ball_wood 5',
 	recipe = {
 		{"","default:wood",""},
@@ -101,14 +101,14 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = 'cannons:ball_stone',
 	recipe = {
 		{"default:stone"},
 	},
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = 'cannons:ball_steel 2',
 	recipe = {
 		{"", "default:steel_ingot",""},
@@ -118,7 +118,7 @@ minetest.register_craft({
 })
 
 if cannons.config:get_bool("enable_explosion") then
-minetest.register_craft({
+core.register_craft({
 	output = 'cannons:ball_exploding 2',
 	recipe = {
 		{"","default:mese",""},
@@ -129,7 +129,7 @@ minetest.register_craft({
 end
 
 if cannons.config:get_bool("enable_fire") then
-minetest.register_craft({
+core.register_craft({
 	output = 'cannons:ball_fire 2',
 	recipe = {
 		{"","default:wood",""},
@@ -143,7 +143,7 @@ end
 --++++++++++++++++++++++++++++++++++++
 
 --steel cannon
-minetest.register_node("cannons:cannon_steel", {
+core.register_node("cannons:cannon_steel", {
 	description = "steel cannon",
 	stack_max = 1,
 	--tiles = {"cannon_cannon_top.png","cannon_cannon_top.png","cannon_cannon_side.png","cannon_cannon_side.png","cannon_cannon_top.png^cannons_rim.png","cannon_cannon_side.png"},
@@ -170,7 +170,7 @@ minetest.register_node("cannons:cannon_steel", {
 })
 
 --bronze cannon
-minetest.register_node("cannons:cannon_bronze", {
+core.register_node("cannons:cannon_bronze", {
 	description = "bronze cannon",
 	stack_max = 1,
 	--tiles = {"cannon_cannon_top.png","cannon_cannon_top.png","cannon_cannon_side.png","cannon_cannon_side.png","cannon_cannon_top.png^cannons_rim.png","cannon_cannon_side.png"},
@@ -196,7 +196,7 @@ minetest.register_node("cannons:cannon_bronze", {
 	on_metadata_inventory_move = cannons.inventory_modified,
 })
 
-minetest.register_node("cannons:wood_stand", {
+core.register_node("cannons:wood_stand", {
 	description = "Wooden cannon stand",
 	stack_max = 9,
 	--tiles = side								other
@@ -213,7 +213,7 @@ minetest.register_node("cannons:wood_stand", {
 	on_rightclick = cannons.stand_on_rightclick
 })
 
-minetest.register_node("cannons:ship_stand", {
+core.register_node("cannons:ship_stand", {
 	description = "Wooden cannon stand",
 	stack_max = 9,
 	--tiles = wheel					material			side
@@ -231,7 +231,7 @@ minetest.register_node("cannons:ship_stand", {
 })
 --wooden stand with steel cannon
 --in German: Holzständer mit Stahkanone
-minetest.register_node("cannons:wood_stand_with_cannon_steel", {
+core.register_node("cannons:wood_stand_with_cannon_steel", {
 	description = "wooden stand with steel cannon",
 	cannons ={stand="cannons:wood_stand",cannon="cannons:cannon_steel"},
 	stack_max = 0,
@@ -257,7 +257,7 @@ minetest.register_node("cannons:wood_stand_with_cannon_steel", {
 	on_metadata_inventory_move = cannons.inventory_modified,
 })
 
-minetest.register_node("cannons:ship_stand_with_cannon_steel", {
+core.register_node("cannons:ship_stand_with_cannon_steel", {
 	description = "ship stand with steel cannon",
 	cannons ={stand="cannons:ship_stand",cannon="cannons:cannon_steel"},
 	stack_max = 0,
@@ -283,7 +283,7 @@ minetest.register_node("cannons:ship_stand_with_cannon_steel", {
 	on_metadata_inventory_move = cannons.inventory_modified,
 })
 
-minetest.register_node("cannons:ship_stand_with_cannon_bronze", {
+core.register_node("cannons:ship_stand_with_cannon_bronze", {
 	description = "ship stand with bronze cannon",
 	cannons ={stand="cannons:ship_stand",cannon="cannons:cannon_bronze"},
 	stack_max = 0,
@@ -310,7 +310,7 @@ minetest.register_node("cannons:ship_stand_with_cannon_bronze", {
 })
 --wooden stand with bronze cannon --
 --in German: Holzständer mit Bronzekanone
-minetest.register_node("cannons:wood_stand_with_cannon_bronze", {
+core.register_node("cannons:wood_stand_with_cannon_bronze", {
 	description = "wooden stand with bronze cannon",
 	cannons ={stand="cannons:wood_stand",cannon="cannons:cannon_bronze"},
 	stack_max = 0,

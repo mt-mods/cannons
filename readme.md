@@ -1,5 +1,5 @@
 # Welcome to the cannons mod #
-cannons is a mod for the game minetest written by Kingarthurs Team
+cannons is a mod for minetest game written by Kingarthurs Team
 (Semmett9, eythen, and addi)
 
 if you have some muni in the cannon and some gunpowder
@@ -98,7 +98,7 @@ local ball_wood={
 			damage_groups={fleshy=self.damage},
 			}, nil)
 		self.object:remove()
-		minetest.chat_send_all(playername .." tried to catch a cannonball")
+		core.chat_send_all(playername .." tried to catch a cannonball")
 	end,
 	on_mob_hit = function(self,pos,mob)
 		mob:punch(self.object, 1.0, {
@@ -109,16 +109,16 @@ local ball_wood={
 	end,
 	on_node_hit = function(self,pos,node)
 		if node.name == "default:dirt_with_grass" then			
-			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
-			minetest.sound_play("cannons_hit",
+			core.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
+			core.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		elseif node.name == "default:water_source" then
-		minetest.sound_play("cannons_splash",
+		core.sound_play("cannons_splash",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		else
-		minetest.sound_play("cannons_hit",
+		core.sound_play("cannons_hit",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		end

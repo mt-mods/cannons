@@ -1,13 +1,13 @@
 {
     "name": "cannons",
-    "description": "To shoot insert muni and gunpowder and punch the cannon with a torch.",
+    "description": "To shoot, insert munitions and gunpowder and punch the cannon with a torch.",
     "keywords": [
 		"cannon",
         "cannons",
 		"medieval",
 		"shoot"	
     ],
-    "forum": "http://forum.minetest.net/viewtopic.php?f=11&t=7744",
+    "forum": "http://forum.luanti.org/viewtopic.php?f=11&t=7744",
     "screenshots": [
         "https://bitbucket.org/kingarthursteam/cannons/raw/master/screenshot.png",
 		"https://bitbucket.org/kingarthursteam/cannons/wiki/screenshots/screenshot_1531516.png",

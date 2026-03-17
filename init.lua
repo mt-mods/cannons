@@ -1,6 +1,6 @@
 cannons = {}
-cannons.MODPATH = minetest.get_modpath(minetest.get_current_modname())
-local worldpath = minetest.get_worldpath()
+cannons.MODPATH = core.modpath(core.get_current_modname())
+local worldpath = core.get_worldpath()
 cannons.config = Settings(worldpath.."/cannons.conf")
 
 local conf_table = cannons.config:to_table()
@@ -26,18 +26,18 @@ if cannons.config:get_bool("convert_old_nodes") then
 	dofile(cannons.MODPATH .."/convert.lua")
 end
 
-if minetest.get_modpath("tnt") then
-	minetest.log("info","TNT mod is aviable. registering some TNT stuff")
+if core.get_modpath("tnt") then
+	core.log("info","TNT mod is aviable. registering some TNT stuff")
 	dofile(cannons.MODPATH .."/tnt.lua")
 end
 
-if minetest.get_modpath("locks") then
-	minetest.log("warning","locks mod enabled. dont execute locks.lua because this is an unstable beta version!")
+if core.get_modpath("locks") then
+	core.log("warning","locks mod enabled. dont execute locks.lua because this is an unstable beta version!")
 	--dofile(cannons.MODPATH .."/locks.lua")--if the locks mod is installed execute this file
 end
-if minetest.get_modpath("moreores") then
-minetest.log("info","moreores mod enabled. execute moreores.lua")
+if core.get_modpath("moreores") then
+core.log("info","moreores mod enabled. execute moreores.lua")
 	dofile(cannons.MODPATH .."/moreores.lua")--if the moreores mod is installed execute this file
 end
-minetest.log("info", "[MOD]"..minetest.get_current_modname().." -- loaded from "..minetest.get_modpath(minetest.get_current_modname()))
+core.log("info", "[MOD]"..core.get_current_modname().." -- loaded from "..core.get_modpath(core.get_current_modname()))
 
