@@ -1,16 +1,16 @@
-minetest.register_abm({
+core.register_abm({
 	nodenames = {"cannons:cannon","cannons:bronze_canon","cannons:mithril_cannon"},
 	--neighbors = {"cannons:stand","cannons.stand_wood"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local stand_pos = {x= pos.x,y= pos.y-1,z=pos.z}
-		local stand = minetest.get_node(stand_pos)
+		local stand = core.get_node(stand_pos)
 		if stand.name == "cannons:stand" or stand.name == "cannons:stand_wood" then -- cannon stand with cannon
 			if stand.name == "cannons:stand" then
-				minetest.set_node(stand_pos, {name = "default:cobble"})--replace stand with cobblestone
+				core.set_node(stand_pos, {name = "default:cobble"})--replace stand with cobblestone
 			else
-				minetest.set_node(stand_pos, {name = "default:wood"})--replace stand with cobblestone
+				core.set_node(stand_pos, {name = "default:wood"})--replace stand with cobblestone
 			end
 			if node.name == "cannons:cannon" then
 				node.name = "cannons:wood_stand_with_cannon_steel"
@@ -24,7 +24,7 @@ minetest.register_abm({
 				node.name = "air"
 			end
 
-			minetest.swap_node(pos, node)
+			core.swap_node(pos, node)
 
 		else --else its a single or disabled cannon
 			print("zweite if")
@@ -39,28 +39,28 @@ minetest.register_abm({
 			else --dont know what else can happen, but "Der Teufel ist ein Eichh�rnchen"
 				node.name = "air"
 			end
-			minetest.swap_node(pos, node)
+			core.swap_node(pos, node)
 		end
 	end,
 })
 
 --abm to convert single cannonstands
-minetest.register_abm({
+core.register_abm({
 	nodenames = {"cannons:stand","cannons:stand_wood"},
 	interval = 1.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local above_pos = {x= pos.x,y= pos.y+1,z=pos.z}
-		local above = minetest.get_node(above_pos)
+		local above = core.get_node(above_pos)
 		--if above the  stand a cannon...
 		if above.name == "air" then
-			minetest.set_node(above_pos, {name = "cannons:wood_stand"})
+			core.set_node(above_pos, {name = "cannons:wood_stand"})
 		else
 			--replace single stands with a full block, and place the stand above it
 			if node.name == "cannons:stand" then
-				minetest.set_node(pos, {name = "default:cobble"})--replace stand with cobblestone
+				core.set_node(pos, {name = "default:cobble"})--replace stand with cobblestone
 			else
-				minetest.set_node(pos, {name = "default:wood"})--replace stand with cobblestone
+				core.set_node(pos, {name = "default:wood"})--replace stand with cobblestone
 			end
 		end
 	end,

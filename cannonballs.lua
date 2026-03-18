@@ -30,7 +30,7 @@ local exploding={
 	on_node_hit = function(self,pos,node)
 		cannons.nodehitparticles(pos,node)
 		cannons.destroy({x=pos.x, y=pos.y, z=pos.z},self.range)
-		minetest.sound_play("cannons_shot",
+		core.sound_play("cannons_shot",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 		self.object:remove()
 	end,
@@ -64,8 +64,8 @@ local fire={
 	on_node_hit = function(self,pos,node)
 		cannons.nodehitparticles(pos,node)
 		pos = self.lastpos
-		minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="fire:basic_flame"})
-		minetest.sound_play("default_break_glass",
+		core.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="fire:basic_flame"})
+		core.sound_play("default_break_glass",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 		self.object:remove()
 	end,
@@ -96,7 +96,7 @@ cannons.register_muni("cannons:ball_wood_stack_1",{
 			damage_groups={fleshy=self.damage},
 			}, nil)
 		self.object:remove()
-		minetest.chat_send_all(playername .." tried to catch a cannonball")
+		core.chat_send_all(playername .." tried to catch a cannonball")
 	end,
 	on_mob_hit = function(self,pos,mob)
 		mob:punch(self.object, 1.0, {
@@ -108,16 +108,16 @@ cannons.register_muni("cannons:ball_wood_stack_1",{
 	on_node_hit = function(self,pos,node)
 		cannons.nodehitparticles(pos,node)
 		if node.name == "default:dirt_with_grass" then
-			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
-			minetest.sound_play("cannons_hit",
+			core.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
+			core.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		elseif node.name == "default:water_source" then
-		minetest.sound_play("cannons_splash",
+		core.sound_play("cannons_splash",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		else
-		minetest.sound_play("cannons_hit",
+		core.sound_play("cannons_hit",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		end
@@ -146,7 +146,7 @@ cannons.register_muni("cannons:ball_stone_stack_1",{
 			damage_groups={fleshy=self.damage},
 			}, nil)
 		self.object:remove()
-		minetest.chat_send_all(playername .." tried to catch a cannonball")
+		core.chat_send_all(playername .." tried to catch a cannonball")
 	end,
 	on_mob_hit = function(self,pos,mob)
 		mob:punch(self.object, 1.0, {
@@ -158,16 +158,16 @@ cannons.register_muni("cannons:ball_stone_stack_1",{
 	on_node_hit = function(self,pos,node)
 	cannons.nodehitparticles(pos,node)
 		if node.name == "default:dirt_with_grass" then
-			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
-			minetest.sound_play("cannons_hit",
+			core.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
+			core.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		elseif node.name == "default:water_source" then
-		minetest.sound_play("cannons_splash",
+		core.sound_play("cannons_splash",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		else
-		minetest.sound_play("cannons_hit",
+		core.sound_play("cannons_hit",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		end
@@ -196,7 +196,7 @@ cannons.register_muni("cannons:ball_steel_stack_1",{
 			damage_groups={fleshy=self.damage},
 			}, nil)
 		self.object:remove()
-		minetest.chat_send_all(playername .." tried to catch a canonball")
+		core.chat_send_all(playername .." tried to catch a canonball")
 	end,
 	on_mob_hit = function(self,pos,mob)
 		mob:punch(self.object, 1.0, {
@@ -208,16 +208,16 @@ cannons.register_muni("cannons:ball_steel_stack_1",{
 	on_node_hit = function(self,pos,node)
 		cannons.nodehitparticles(pos,node)
 		if node.name == "default:dirt_with_grass" then
-			minetest.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
-			minetest.sound_play("cannons_hit",
+			core.env:set_node({x=pos.x, y=pos.y, z=pos.z},{name="default:dirt"})
+			core.sound_play("cannons_hit",
 				{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		elseif node.name == "default:water_source" then
-		minetest.sound_play("cannons_splash",
+		core.sound_play("cannons_splash",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		else
-		minetest.sound_play("cannons_hit",
+		core.sound_play("cannons_hit",
 			{pos = pos, gain = 1.0, max_hear_distance = 32,})
 			self.object:remove()
 		end

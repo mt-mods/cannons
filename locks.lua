@@ -3,7 +3,7 @@
 --++++++++++++++++++++++++++++++++++++
 
 
-minetest.register_node("cannons:shared_locked_cannon", {
+core.register_node("cannons:shared_locked_cannon", {
 	description = "locked shareable Cannon",
 	stack_max = 1,
 	tiles = {"cannon_cannon_top.png","cannon_cannon_top.png","cannon_cannon_side.png","cannon_cannon_side.png","cannon_cannon_top.png^cannons_rim.png","cannon_cannon_side.png"},
@@ -30,7 +30,7 @@ minetest.register_node("cannons:shared_locked_cannon", {
 	--},
 	on_construct = cannons.on_construct_locks,
 	can_dig = function(pos,player)
-		local meta = minetest.get_meta(pos);
+		local meta = core.get_meta(pos);
 		local inv = meta:get_inventory()
 		if not inv:is_empty("gunpowder") then
 			return false
@@ -57,7 +57,7 @@ minetest.register_node("cannons:shared_locked_cannon", {
 })
 
 
-minetest.register_craft({
+core.register_craft({
    output = 'cannons:shared_locked_cannon',
    recipe = {
       {'group:cannon', 'locks:lock',},

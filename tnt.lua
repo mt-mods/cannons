@@ -11,15 +11,15 @@ cannons.register_muni("tnt:tnt",{
 	velocity=20,
 	collisionbox = {-0.25,-0.25,-0.25, 0.25,0.25,0.25},
 	on_player_hit = function(self,pos,player)
-		minetest.registered_nodes["tnt:tnt_burning"].on_timer(pos);
+		core.registered_nodes["tnt:tnt_burning"].on_timer(pos);
 		self.object:remove()
 	end,
 	on_mob_hit = function(self,pos,mob)
-		minetest.registered_nodes["tnt:tnt_burning"].on_timer(pos);
+		core.registered_nodes["tnt:tnt_burning"].on_timer(pos);
 		self.object:remove()
 	end,
 	on_node_hit = function(self,pos,node)
-		minetest.registered_nodes["tnt:tnt_burning"].on_timer(pos);
+		core.registered_nodes["tnt:tnt_burning"].on_timer(pos);
 		self.object:remove()
 	end,
 })
